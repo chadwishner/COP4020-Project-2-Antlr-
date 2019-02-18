@@ -34,6 +34,16 @@ public interface CalculatorListener extends ParseTreeListener {
 	 */
 	void exitTopExpr(CalculatorParser.TopExprContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link CalculatorParser#statement}.
+	 * @param ctx the parse tree
+	 */
+	void enterStatement(CalculatorParser.StatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CalculatorParser#statement}.
+	 * @param ctx the parse tree
+	 */
+	void exitStatement(CalculatorParser.StatementContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link CalculatorParser#varDef}.
 	 * @param ctx the parse tree
 	 */

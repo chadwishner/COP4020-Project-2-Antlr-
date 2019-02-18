@@ -9,49 +9,52 @@ grammar Calculator;
 }
 
 @members {
-    HashMap<String, Double> global_scope = new HashMap<String, Double>();
+    // Define custom Scope class to create a local scope hierarchy
+    class Scope {
+        Scope parent;
+        HashMap<String, Double> variables;
+        boolean isGlobalScope;
+
+        public Scope(Scope parent, boolean isGlobalScope){
+            this.parent = parent;
+            this.isGlobalScope = isGlobalScope;
+            this.variables = new HashMap<String, Double>();
+        }
+
+        public HashMap<String, Double> getVariables(){
+            return this.variables;
+        }
+
+        public Scope getParentScope(){
+            return this.parent;
+        }
+
+        public boolean isGlobal(){
+            return this.isGlobalScope;
+        }
+    }
+    
+    Scope current_scope = new Scope(null, true);
     ArrayList<Double> prints = new ArrayList<Double>();
     Scanner scan = new Scanner(System.in);
-    Stack<HashMap<String, Double>> scopes = new Stack<HashMap<String, Double>>();
 
-    // This function will take care of checking the current scopes for a variable's value
-    // If the variable is found, it will be part of the top-most element of the scopes stack.
-    public boolean findScope(String varName){
-        if(scopes.empty()){
-            scopes.push(global_scope);
-        }
-        while(scopes.peek() != global_scope){
-            // Get the current scope and check if that variable is contained within it.
-            HashMap<String, Double> current_scope = scopes.pop();
-            if(current_scope.containsKey(varName)){
-                scopes.push(current_scope);
-                return true;
-            }
-        }
-        
-        // Check the global scope
-        HashMap<String, Double> current_scope = scopes.peek();
-        if(current_scope.containsKey(varName)){
-                return true;
-        }
-
-        // We've checked every scope, including the global scope and did not find the variable
-        return false;
-    }
-
-    // Return a variable's value from the top-most scope
+    // This function will take care of checking the current scopes for a variable's value.
     public Double getVariable(String varName){
-        if(findScope(varName)){
-            return scopes.peek().get(varName);
-        }else{
-            return null;
+        Scope temp = current_scope;
+        
+        while(temp.getVariables().containsKey(varName) == false){
+            if(temp.isGlobal){
+                return null;
+            }
+            temp = current_scope.getParentScope();
         }
+        return temp.getVariables().get(varName);
     }
 
-    // Add a new scope to the stack, when creating a function, conditional, or loop
+    // Add a new scope when creating a function, conditional, or loop
     public void createScope(){
-        HashMap<String, Double> new_scope = new HashMap<String, Double>();
-        scopes.push(new_scope);
+        new_scope = new Scope(current_scope, false);
+        current_scope = new_scope;
     }
 }
 
@@ -60,6 +63,9 @@ exprList: topExpr ( ';' topExpr)* ';'? ;
 
 topExpr:
     varDef
+    | ifDef
+    | forDef
+    | whileDef
     | boolExpr { System.out.println(Double.toString($boolExpr.i)); }
     | specialExpr { System.out.println(Double.toString($specialExpr.i)); }
     | libraryFunc { System.out.println(Double.toString($libraryFunc.i)); }
@@ -67,8 +73,13 @@ topExpr:
     | printFunc { for(Double temp: prints){System.out.println(Double.toString(temp));} }
     ;
 
+// TODO: Don't know how to actually evaluate the expr within the while/if/for statements.
+ifDef: IF SPACE* '(' SPACE* cond=boolExpr SPACE* ')' SPACE* expr1=topExpr (ELSE expr2=topExpr)? { createScope(); };
+whileDef: WHILE SPACE* '(' SPACE* cond=boolExpr SPACE* ')' SPACE* exec=topExpr {createScope();};
+forDef: FOR SPACE* '(' SPACE* expr1=topExpr SPACE* ';' SPACE* cond=boolExpr SPACE* ';' SPACE* expr2=topExpr SPACE* ')' { createScope(); };
+
 // Variable Definitions
-varDef: ID '=' val=expr {scopes.peek().put($ID.text, $val.i);};
+varDef: ID '=' val=expr {current_scope.getVariables().put($ID.text, $val.i);};
 
 // Print function
 printFunc:
@@ -76,7 +87,15 @@ printFunc:
 
 // Supported Boolean Expressions
 boolExpr returns [Double i]:
-      '!' expr { $i = $expr.i != 0 ? 0.0 : 1.0 ;}
+      expr { $i = ($expr.i >= 0.0 ? 1.0 : 0.0); }
+    | '!' expr { $i = $expr.i != 0 ? 0.0 : 1.0 ;}
+    | el=expr '>' er=expr { $i = $expr.i > $expr.i ? 1.0 : 0.0 ;}
+    | el=expr '>=' er=expr { $i = $expr.i >= $expr.i ? 1.0 : 0.0 ;}
+    | el=expr '<' er=expr { $i = $expr.i < $expr.i ? 1.0 : 0.0 ;}
+    | el=expr '>=' er=expr { $i = $expr.i >= $expr.i ? 1.0 : 0.0 ;}
+    | el=expr '==' er=expr { $i = $expr.i == $expr.i ? 1.0 : 0.0 ;}
+    | el=expr '!=' er=expr { $i = $expr.i != $expr.i ? 1.0 : 0.0 ;}
+    | el=expr '===' er=expr { $i = $expr.i === $expr.i ? 1.0 : 0.0 ;}
     | el=expr op='&&' er=expr { $i = ($el.i != 0 && $er.i != 0) ? 1.0 : 0.0; }
     | el=expr op='||' er=expr {$i = ($el.i != 0 || $er.i != 0) ? 1.0 : 0.0; }
     ;
@@ -128,20 +147,23 @@ expr returns [Double i]:
             if(getVariable($ID.text) != null)
                 $i = getVariable($ID.text);
             else
-                System.out.println("Undeclared variable.");
+                System.out.println("Undeclared variable: " + $ID.text);
         }            
     | '(' e=expr ')' {$i = $expr.i;}
     ;
 
+
 PRINT:'print';
+IF: 'if';
+ELSE: 'else';
+WHILE: 'while';
+FOR: 'for';
 NUM: [0-9]+('.'[0-9]*)? ; // Recognize Doubles
 WS : SPACE+ -> skip ; // Skip White Space
 COM : '/*' (.)*? '*/' -> skip ; // Skip Comments
-SPACE: [ \t\r\n];
 SUBT: '-';
 ADD: '+';
 DIVD: '/';
 MULT: '*';
-IF: 'if';
-ELSE: 'else';
+SPACE: [ \t\r\n];
 ID: [_A-Za-z]+;
