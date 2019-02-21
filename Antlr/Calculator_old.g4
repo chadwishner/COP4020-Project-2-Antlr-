@@ -1,4 +1,4 @@
-grammar Calculator;
+grammar Calculator_old;
 
 @header {
     import java.util.HashMap;
@@ -156,7 +156,7 @@ expr returns [Double i]:
 PRINT:'print';
 IF: 'if';
 ELSE: 'else';
-WHILE: 'while';
+WHILE: 'while'; 
 FOR: 'for';
 NUM: [0-9]+('.'[0-9]*)? ; // Recognize Doubles
 WS : SPACE+ -> skip ; // Skip White Space
