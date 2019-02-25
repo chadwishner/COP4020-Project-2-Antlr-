@@ -80,8 +80,7 @@ expr
     | expr DIV expr #divExprTag
     | expr ADD expr #addExprTag
     | expr SUB expr #subExprTag
-    | NUM           #posNumTag
-    | '-' NUM       #negNumTag
+    | NUM           #numExprTag
     | ID            #idTag
     ;
 
@@ -90,7 +89,7 @@ IF: 'if';
 ELSE: 'else';
 WHILE: 'while'; 
 FOR: 'for';
-NUM: [0-9]+('.'[0-9]*)? ; // Recognize Doubles
+NUM: [-]?[0-9]+('.'[0-9]*)? ; // Recognize Doubles
 WS : SPACE+ -> skip ; // Skip White Space
 COM : '/*' (.)*? '*/' -> skip ; // Skip Comments
 SUB: '-';

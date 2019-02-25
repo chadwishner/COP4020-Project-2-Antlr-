@@ -1,5 +1,1 @@
-/* Variable Unit Tests */
-
-/*if (!0) i=1 else i=2*/
-
-if (1) print 1 else print 2
+1 + 2;

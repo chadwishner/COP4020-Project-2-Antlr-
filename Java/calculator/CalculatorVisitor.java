@@ -187,19 +187,12 @@ public interface CalculatorVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitAddExprTag(CalculatorParser.AddExprTagContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code posNumTag}
+	 * Visit a parse tree produced by the {@code numExprTag}
 	 * labeled alternative in {@link CalculatorParser#expr}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitPosNumTag(CalculatorParser.PosNumTagContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code negNumTag}
-	 * labeled alternative in {@link CalculatorParser#expr}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitNegNumTag(CalculatorParser.NegNumTagContext ctx);
+	T visitNumExprTag(CalculatorParser.NumExprTagContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code idTag}
 	 * labeled alternative in {@link CalculatorParser#expr}.

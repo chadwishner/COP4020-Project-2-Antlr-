@@ -318,25 +318,13 @@ public class CalculatorBaseListener implements CalculatorListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterPosNumTag(CalculatorParser.PosNumTagContext ctx) { }
+	@Override public void enterNumExprTag(CalculatorParser.NumExprTagContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitPosNumTag(CalculatorParser.PosNumTagContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterNegNumTag(CalculatorParser.NegNumTagContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitNegNumTag(CalculatorParser.NegNumTagContext ctx) { }
+	@Override public void exitNumExprTag(CalculatorParser.NumExprTagContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

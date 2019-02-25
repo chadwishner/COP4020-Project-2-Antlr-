@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class EvalVisitor extends CalculatorBaseVisitor<Double> {
 
-    List<Double> prints = new List<Double>();
+    List<Double> prints = new ArrayList<Double>();
     Scanner scan = new Scanner(System.in);
 
     // Create a new global scope, of which new sub-scopes will be created from.
@@ -18,9 +18,8 @@ public class EvalVisitor extends CalculatorBaseVisitor<Double> {
     @Override
     public Double visitExprListTag(CalculatorParser.ExprListTagContext ctx){
         List<CalculatorParser.TopExprContext> topExpressions = ctx.topExpr();
-        Value temp;
-        for(Calculator.TopExprContext topExpression : topExpressions){
-            this.visit(ctx.topExpression());
+        for(CalculatorParser.TopExprContext topExpression : topExpressions){
+            this.visit(topExpression);
         }
         // TODO: This return statement needs review.
         return 1.0;
@@ -29,7 +28,7 @@ public class EvalVisitor extends CalculatorBaseVisitor<Double> {
     // The ID referenced below may need to be passed in as a obj of String
     @Override
     public Double visitVarDefTag(CalculatorParser.VarDefTagContext ctx){
-        this.current_scope.put(ctx.ID.getText(), this.visit(ctx.expr()));
+        this.current_scope.getVariables().put(ctx.ID().getText(), this.visit(ctx.expr()));
         return this.visit(ctx.expr());
     }
 
@@ -131,7 +130,7 @@ public class EvalVisitor extends CalculatorBaseVisitor<Double> {
 
     @Override
     public Double visitAndBoolTag(CalculatorParser.AndBoolTagContext ctx){
-        if(this.visit(ctx.expr(0)) && this.visit(ctx.expr(1))){
+        if(this.visit(ctx.expr(0)) != 0.0 && this.visit(ctx.expr(1)) != 0.0){
             return 1.0;
         }else{
             return 0.0;
@@ -140,7 +139,7 @@ public class EvalVisitor extends CalculatorBaseVisitor<Double> {
 
     @Override
     public Double visitOrBoolTag(CalculatorParser.OrBoolTagContext ctx){
-        if(this.visit(ctx.expr(0)) || this.visit(ctx.expr(1))){
+        if(this.visit(ctx.expr(0)) != 0.0 || this.visit(ctx.expr(1)) != 0.0){
             return 1.0;
         }else{
             return 0.0;
@@ -151,7 +150,7 @@ public class EvalVisitor extends CalculatorBaseVisitor<Double> {
     /* ====================== SPECIAL EXPR ====================== */ 
     @Override
     public Double visitSqrtExprTag(CalculatorParser.SqrtExprTagContext ctx){
-        if(ctx.value < 0){
+        if(this.visit(ctx.value) < 0.0){
             System.out.println("Error: expression within Sqrt() must be positive.");
             System.exit(0);
             return -1.0;
@@ -195,9 +194,9 @@ public class EvalVisitor extends CalculatorBaseVisitor<Double> {
     /* ====================== PRINT FUNC ====================== */
     @Override
     public Double visitPrintFuncTag(CalculatorParser.PrintFuncTagContext ctx){
-        List<CalculatorParser.ExprTagContext> statements = ctx.expr();
-        for(CalculatorParser.ExprTagContext statement : statements){
-            prints.add(this.visit(ctx.statement()));
+        List<CalculatorParser.ExprContext> statements = ctx.expr();
+        for(CalculatorParser.ExprContext statement : statements){
+            prints.add(this.visit(statement));
         }
         // TODO: This return statement needs review.
         return 1.0;
@@ -230,20 +229,16 @@ public class EvalVisitor extends CalculatorBaseVisitor<Double> {
     }
 
     @Override
-    public Double visitPosNumTag(CalculatorParser.PosNumTagContext ctx){
+    public Double visitNumExprTag(CalculatorParser.NumExprTagContext ctx){
         return Double.valueOf(ctx.getText());
     }
 
     @Override
-    public Double visitNegNumTag(CalculatorParser.NegNumTagContext ctx){
-        return -1.0 * Double.valueOf(ctx.getText());
-    }
-
-    @Override
     public Double visitIdTag(CalculatorParser.IdTagContext ctx){
-        Double value = current_scope.getVariable(this.visit(ctx.expr()));
+        String var = ctx.ID().getText();
+        Double value = current_scope.getVariable(var);
         if(value == null){
-            System.out.println("Uninitialized variable: " + this.visit(ctx.expr()));
+            System.out.println("Uninitialized variable: " + var);
             System.exit(0);
         }
         return value;

@@ -308,29 +308,17 @@ public interface CalculatorListener extends ParseTreeListener {
 	 */
 	void exitAddExprTag(CalculatorParser.AddExprTagContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code posNumTag}
+	 * Enter a parse tree produced by the {@code numExprTag}
 	 * labeled alternative in {@link CalculatorParser#expr}.
 	 * @param ctx the parse tree
 	 */
-	void enterPosNumTag(CalculatorParser.PosNumTagContext ctx);
+	void enterNumExprTag(CalculatorParser.NumExprTagContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code posNumTag}
+	 * Exit a parse tree produced by the {@code numExprTag}
 	 * labeled alternative in {@link CalculatorParser#expr}.
 	 * @param ctx the parse tree
 	 */
-	void exitPosNumTag(CalculatorParser.PosNumTagContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code negNumTag}
-	 * labeled alternative in {@link CalculatorParser#expr}.
-	 * @param ctx the parse tree
-	 */
-	void enterNegNumTag(CalculatorParser.NegNumTagContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code negNumTag}
-	 * labeled alternative in {@link CalculatorParser#expr}.
-	 * @param ctx the parse tree
-	 */
-	void exitNegNumTag(CalculatorParser.NegNumTagContext ctx);
+	void exitNumExprTag(CalculatorParser.NumExprTagContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code idTag}
 	 * labeled alternative in {@link CalculatorParser#expr}.
