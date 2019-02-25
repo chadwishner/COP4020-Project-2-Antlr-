@@ -130,6 +130,11 @@ public class CalculatorParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).exitExprListTag(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof CalculatorVisitor ) return ((CalculatorVisitor<? extends T>)visitor).visitExprListTag(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final ExprListContext exprList() throws RecognitionException {
@@ -223,6 +228,11 @@ public class CalculatorParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).exitTopExpr(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof CalculatorVisitor ) return ((CalculatorVisitor<? extends T>)visitor).visitTopExpr(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -347,6 +357,11 @@ public class CalculatorParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).exitIfDefTag(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof CalculatorVisitor ) return ((CalculatorVisitor<? extends T>)visitor).visitIfDefTag(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -483,6 +498,11 @@ public class CalculatorParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).exitWhileDefTag(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof CalculatorVisitor ) return ((CalculatorVisitor<? extends T>)visitor).visitWhileDefTag(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final WhileDefContext whileDef() throws RecognitionException {
@@ -609,6 +629,11 @@ public class CalculatorParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).exitForDefTag(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof CalculatorVisitor ) return ((CalculatorVisitor<? extends T>)visitor).visitForDefTag(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -772,6 +797,11 @@ public class CalculatorParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).exitVarDefTag(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof CalculatorVisitor ) return ((CalculatorVisitor<? extends T>)visitor).visitVarDefTag(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final VarDefContext varDef() throws RecognitionException {
@@ -831,6 +861,11 @@ public class CalculatorParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).exitPrintFuncTag(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof CalculatorVisitor ) return ((CalculatorVisitor<? extends T>)visitor).visitPrintFuncTag(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -948,6 +983,11 @@ public class CalculatorParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).exitNeqBoolTag(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof CalculatorVisitor ) return ((CalculatorVisitor<? extends T>)visitor).visitNeqBoolTag(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 	public static class GteBoolTagContext extends BoolExprContext {
 		public Token op;
@@ -965,6 +1005,11 @@ public class CalculatorParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).exitGteBoolTag(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof CalculatorVisitor ) return ((CalculatorVisitor<? extends T>)visitor).visitGteBoolTag(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 	public static class LtBoolTagContext extends BoolExprContext {
@@ -984,6 +1029,11 @@ public class CalculatorParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).exitLtBoolTag(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof CalculatorVisitor ) return ((CalculatorVisitor<? extends T>)visitor).visitLtBoolTag(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 	public static class GtBoolTagContext extends BoolExprContext {
 		public Token op;
@@ -1001,6 +1051,11 @@ public class CalculatorParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).exitGtBoolTag(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof CalculatorVisitor ) return ((CalculatorVisitor<? extends T>)visitor).visitGtBoolTag(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 	public static class OrBoolTagContext extends BoolExprContext {
@@ -1020,6 +1075,11 @@ public class CalculatorParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).exitOrBoolTag(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof CalculatorVisitor ) return ((CalculatorVisitor<? extends T>)visitor).visitOrBoolTag(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 	public static class ExprBoolTagContext extends BoolExprContext {
 		public ExprContext expr() {
@@ -1033,6 +1093,11 @@ public class CalculatorParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).exitExprBoolTag(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof CalculatorVisitor ) return ((CalculatorVisitor<? extends T>)visitor).visitExprBoolTag(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 	public static class NotBoolTagContext extends BoolExprContext {
@@ -1048,6 +1113,11 @@ public class CalculatorParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).exitNotBoolTag(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof CalculatorVisitor ) return ((CalculatorVisitor<? extends T>)visitor).visitNotBoolTag(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 	public static class LteBoolTagContext extends BoolExprContext {
@@ -1067,6 +1137,11 @@ public class CalculatorParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).exitLteBoolTag(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof CalculatorVisitor ) return ((CalculatorVisitor<? extends T>)visitor).visitLteBoolTag(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 	public static class EqBoolTagContext extends BoolExprContext {
 		public Token op;
@@ -1085,6 +1160,11 @@ public class CalculatorParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).exitEqBoolTag(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof CalculatorVisitor ) return ((CalculatorVisitor<? extends T>)visitor).visitEqBoolTag(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 	public static class AndBoolTagContext extends BoolExprContext {
 		public Token op;
@@ -1102,6 +1182,11 @@ public class CalculatorParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).exitAndBoolTag(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof CalculatorVisitor ) return ((CalculatorVisitor<? extends T>)visitor).visitAndBoolTag(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -1264,6 +1349,11 @@ public class CalculatorParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).exitReadExprTag(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof CalculatorVisitor ) return ((CalculatorVisitor<? extends T>)visitor).visitReadExprTag(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 	public static class SqrtExprTagContext extends SpecialExprContext {
 		public ExprContext value;
@@ -1282,6 +1372,11 @@ public class CalculatorParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).exitSqrtExprTag(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof CalculatorVisitor ) return ((CalculatorVisitor<? extends T>)visitor).visitSqrtExprTag(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -1419,6 +1514,11 @@ public class CalculatorParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).exitExpFuncTag(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof CalculatorVisitor ) return ((CalculatorVisitor<? extends T>)visitor).visitExpFuncTag(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 	public static class SinFuncTagContext extends LibraryFuncContext {
 		public ExprContext var;
@@ -1437,6 +1537,11 @@ public class CalculatorParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).exitSinFuncTag(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof CalculatorVisitor ) return ((CalculatorVisitor<? extends T>)visitor).visitSinFuncTag(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 	public static class LogFuncTagContext extends LibraryFuncContext {
@@ -1457,6 +1562,11 @@ public class CalculatorParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).exitLogFuncTag(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof CalculatorVisitor ) return ((CalculatorVisitor<? extends T>)visitor).visitLogFuncTag(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 	public static class CosFuncTagContext extends LibraryFuncContext {
 		public ExprContext var;
@@ -1475,6 +1585,11 @@ public class CalculatorParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).exitCosFuncTag(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof CalculatorVisitor ) return ((CalculatorVisitor<? extends T>)visitor).visitCosFuncTag(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -1693,6 +1808,11 @@ public class CalculatorParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).exitParenExprTag(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof CalculatorVisitor ) return ((CalculatorVisitor<? extends T>)visitor).visitParenExprTag(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 	public static class AddExprTagContext extends ExprContext {
 		public List<ExprContext> expr() {
@@ -1711,6 +1831,11 @@ public class CalculatorParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).exitAddExprTag(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof CalculatorVisitor ) return ((CalculatorVisitor<? extends T>)visitor).visitAddExprTag(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 	public static class PosNumTagContext extends ExprContext {
 		public TerminalNode NUM() { return getToken(CalculatorParser.NUM, 0); }
@@ -1722,6 +1847,11 @@ public class CalculatorParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).exitPosNumTag(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof CalculatorVisitor ) return ((CalculatorVisitor<? extends T>)visitor).visitPosNumTag(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 	public static class NegNumTagContext extends ExprContext {
@@ -1736,6 +1866,11 @@ public class CalculatorParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).exitNegNumTag(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof CalculatorVisitor ) return ((CalculatorVisitor<? extends T>)visitor).visitNegNumTag(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 	public static class IdTagContext extends ExprContext {
 		public TerminalNode ID() { return getToken(CalculatorParser.ID, 0); }
@@ -1747,6 +1882,11 @@ public class CalculatorParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).exitIdTag(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof CalculatorVisitor ) return ((CalculatorVisitor<? extends T>)visitor).visitIdTag(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 	public static class DivExprTagContext extends ExprContext {
@@ -1766,6 +1906,11 @@ public class CalculatorParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).exitDivExprTag(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof CalculatorVisitor ) return ((CalculatorVisitor<? extends T>)visitor).visitDivExprTag(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 	public static class MulExprTagContext extends ExprContext {
 		public List<ExprContext> expr() {
@@ -1784,6 +1929,11 @@ public class CalculatorParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).exitMulExprTag(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof CalculatorVisitor ) return ((CalculatorVisitor<? extends T>)visitor).visitMulExprTag(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 	public static class SubExprTagContext extends ExprContext {
 		public List<ExprContext> expr() {
@@ -1801,6 +1951,11 @@ public class CalculatorParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).exitSubExprTag(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof CalculatorVisitor ) return ((CalculatorVisitor<? extends T>)visitor).visitSubExprTag(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 

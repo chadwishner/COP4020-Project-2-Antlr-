@@ -1,6 +1,5 @@
 package calculator;
 
-import org.antlr.v4.runtime.misc.NotNull;
 import java.util.HashMap;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +8,7 @@ import java.util.Scanner;
 
 public class EvalVisitor extends CalculatorBaseVisitor<Double> {
 
-    List<String> prints = new List<Double>();
+    List<Double> prints = new List<Double>();
     Scanner scan = new Scanner(System.in);
 
     // Create a new global scope, of which new sub-scopes will be created from.
@@ -17,18 +16,21 @@ public class EvalVisitor extends CalculatorBaseVisitor<Double> {
     Scope current_scope = global_scope;
     
     @Override
-    public void visitExprListTag(CalculatorParser.ExprListTagContext ctx){
-        List<CalculatorParser.TopExprTagContext> topExpressions = ctx.topExprTag();
+    public Double visitExprListTag(CalculatorParser.ExprListTagContext ctx){
+        List<CalculatorParser.TopExprContext> topExpressions = ctx.topExpr();
         Value temp;
-        for(Calculator.TopExprTagContext topExpression : topExpressions){
+        for(Calculator.TopExprContext topExpression : topExpressions){
             this.visit(ctx.topExpression());
         }
+        // TODO: This return statement needs review.
+        return 1.0;
     }
 
     // The ID referenced below may need to be passed in as a obj of String
     @Override
-    public void visitVarDefTag(CalculatorParser.VarDefTagContext ctx){
-        this.current_scope.put(ctx.ID, this.visit(ctx.expr));
+    public Double visitVarDefTag(CalculatorParser.VarDefTagContext ctx){
+        this.current_scope.put(ctx.ID.getText(), this.visit(ctx.expr()));
+        return this.visit(ctx.expr());
     }
 
 
@@ -47,101 +49,101 @@ public class EvalVisitor extends CalculatorBaseVisitor<Double> {
 
     /* ====================== BOOLEAN EXPR ====================== */ 
     @Override
-    public boolean visitExprBoolTag(CalculatorParser.ExprBoolTagContext ctx){
-        if(this.visit(ctx.expr) != 0){
-            return true;
+    public Double visitExprBoolTag(CalculatorParser.ExprBoolTagContext ctx){
+        if(this.visit(ctx.expr()) != 0){
+            return 1.0;
         }else{
-            return false;
+            return 0.0;
         }
     }
 
     @Override
-    public boolean visitNotBoolTag(CalculatorParser.NotBoolTagContext ctx){
-        if(this.visit(ctx.expr) != 0){
-            return false;
+    public Double visitNotBoolTag(CalculatorParser.NotBoolTagContext ctx){
+        if(this.visit(ctx.expr()) != 0){
+            return 0.0;
         }else{
-            return true;
+            return 1.0;
         }
     }
 
     @Override
-    public boolean visitGtBoolTag(CalculatorParser.GtBoolTagContext ctx){
+    public Double visitGtBoolTag(CalculatorParser.GtBoolTagContext ctx){
         if(this.visit(ctx.expr(0)) > this.visit(ctx.expr(1))){
-            return true;
+            return 1.0;
         }else{
-            return false;
+            return 0.0;
         }
     }
 
     @Override
-    public boolean visitGteBoolTag(CalculatorParser.GteBoolTagContext ctx){
+    public Double visitGteBoolTag(CalculatorParser.GteBoolTagContext ctx){
         if(this.visit(ctx.expr(0)) >= this.visit(ctx.expr(1))){
-            return true;
+            return 1.0;
         }else{
-            return false;
+            return 0.0;
         }
     }
 
     @Override
-    public boolean visitLtBoolTag(CalculatorParser.LtBoolTagContext ctx){
+    public Double visitLtBoolTag(CalculatorParser.LtBoolTagContext ctx){
         if(this.visit(ctx.expr(0)) < this.visit(ctx.expr(1))){
-            return true;
+            return 1.0;
         }else{
-            return false;
+            return 0.0;
         }
     }
 
     @Override
-    public boolean visitLteBoolTag(CalculatorParser.LteBoolTagContext ctx){
+    public Double visitLteBoolTag(CalculatorParser.LteBoolTagContext ctx){
         if(this.visit(ctx.expr(0)) >= this.visit(ctx.expr(1))){
-            return true;
+            return 1.0;
         }else{
-            return false;
+            return 0.0;
         }
     }
 
     @Override
-    public boolean visitEqBoolTag(CalculatorParser.EqBoolTagContext ctx){
+    public Double visitEqBoolTag(CalculatorParser.EqBoolTagContext ctx){
         if(this.visit(ctx.expr(0)) == this.visit(ctx.expr(1))){
-            return true;
+            return 1.0;
         }else{
-            return false;
+            return 0.0;
         }
     }
     
     @Override 
-    public boolean visitNeqBoolTag(CalculatorParser.NeqBoolTagContext ctx){
+    public Double visitNeqBoolTag(CalculatorParser.NeqBoolTagContext ctx){
         if(this.visit(ctx.expr(0)) != this.visit(ctx.expr(1))){
-            return true;
+            return 1.0;
         }else{
-            return false;
+            return 0.0;
         }
     }
 
     // @Override
-    // public boolean visitEqqBoolTag(CalculatorParser.EqqBoolTagContext ctx){
+    // public Double visitEqqBoolTag(CalculatorParser.EqqBoolTagContext ctx){
     //     if(this.visit(ctx.expr(0)) === this.visit(ctx.expr(1))){
-    //         return true;
+    //         return 1.0;
     //     }else{
-    //         return false;
+    //         return 0.0;
     //     }
     // }
 
     @Override
-    public boolean visitAndBoolTag(CalculatorParser.AndBoolTagContecxt ctx){
+    public Double visitAndBoolTag(CalculatorParser.AndBoolTagContext ctx){
         if(this.visit(ctx.expr(0)) && this.visit(ctx.expr(1))){
-            return true;
+            return 1.0;
         }else{
-            return false;
+            return 0.0;
         }
     }
 
     @Override
-    public boolean visitOrBoolTag(CalculatorParser.OrBoolTagContext ctx){
+    public Double visitOrBoolTag(CalculatorParser.OrBoolTagContext ctx){
         if(this.visit(ctx.expr(0)) || this.visit(ctx.expr(1))){
-            return true;
+            return 1.0;
         }else{
-            return false;
+            return 0.0;
         }
     }
 
@@ -149,10 +151,10 @@ public class EvalVisitor extends CalculatorBaseVisitor<Double> {
     /* ====================== SPECIAL EXPR ====================== */ 
     @Override
     public Double visitSqrtExprTag(CalculatorParser.SqrtExprTagContext ctx){
-        if($value.i < 0){
-            System.println("Error: expression within Sqrt() must be positive.");
+        if(ctx.value < 0){
+            System.out.println("Error: expression within Sqrt() must be positive.");
             System.exit(0);
-            return -1;
+            return -1.0;
         }else{
             return Math.sqrt(this.visit(ctx.expr()));
         }
@@ -176,12 +178,12 @@ public class EvalVisitor extends CalculatorBaseVisitor<Double> {
 
     @Override
     public Double visitLogFuncTag(CalculatorParser.LogFuncTagContext ctx){
-        if(this.visit(ctx.expr() > 0)){
+        if(this.visit(ctx.expr()) > 0){
             return Math.log(this.visit(ctx.expr()));
         }else{
-            System.println("Error: expression with log() must be greater than 0.");
+            System.out.println("Error: expression with log() must be greater than 0.");
             System.exit(0);
-            return -1;
+            return -1.0;
         }
     }
 
@@ -192,11 +194,13 @@ public class EvalVisitor extends CalculatorBaseVisitor<Double> {
 
     /* ====================== PRINT FUNC ====================== */
     @Override
-    public void visitPrintFuncTag(CalculatorParser.PrintFuncTagContext ctx){
+    public Double visitPrintFuncTag(CalculatorParser.PrintFuncTagContext ctx){
         List<CalculatorParser.ExprTagContext> statements = ctx.expr();
         for(CalculatorParser.ExprTagContext statement : statements){
             prints.add(this.visit(ctx.statement()));
         }
+        // TODO: This return statement needs review.
+        return 1.0;
     }
 
     /* ====================== EXPR ====================== */
