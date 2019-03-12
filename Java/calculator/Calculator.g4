@@ -4,6 +4,10 @@ grammar Calculator;
     package calculator;
 }
 
+parse
+    : exprList EOF
+    ;
+
 // Top-Most Expression Tree Nodes
 exprList
     : topExpr ( ';' topExpr)* ';'? #exprListTag

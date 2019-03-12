@@ -19,10 +19,11 @@ public class EvalVisitor extends CalculatorBaseVisitor<Double> {
     public Double visitExprListTag(CalculatorParser.ExprListTagContext ctx){
         List<CalculatorParser.TopExprContext> topExpressions = ctx.topExpr();
         for(CalculatorParser.TopExprContext topExpression : topExpressions){
-            this.visit(topExpression);
+            System.out.println(this.visit(topExpression));
         }
         // TODO: This return statement needs review.
-        return 1.0;
+        
+        return 2.0;
     }
 
     // The ID referenced below may need to be passed in as a obj of String
@@ -118,15 +119,6 @@ public class EvalVisitor extends CalculatorBaseVisitor<Double> {
             return 0.0;
         }
     }
-
-    // @Override
-    // public Double visitEqqBoolTag(CalculatorParser.EqqBoolTagContext ctx){
-    //     if(this.visit(ctx.expr(0)) === this.visit(ctx.expr(1))){
-    //         return 1.0;
-    //     }else{
-    //         return 0.0;
-    //     }
-    // }
 
     @Override
     public Double visitAndBoolTag(CalculatorParser.AndBoolTagContext ctx){
