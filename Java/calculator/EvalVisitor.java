@@ -14,25 +14,24 @@ public class EvalVisitor extends CalculatorBaseVisitor<Double> {
     // Create a new global scope, of which new sub-scopes will be created from.
     Scope global_scope = new Scope(null, true);
     Scope current_scope = global_scope;
-    
+
+   @Override public Double visitTopExpr(CalculatorParser.TopExprContext ctx) { return visitChildren(ctx); }
+
     @Override
     public Double visitExprListTag(CalculatorParser.ExprListTagContext ctx){
         List<CalculatorParser.TopExprContext> topExpressions = ctx.topExpr();
         for(CalculatorParser.TopExprContext topExpression : topExpressions){
-            System.out.println(this.visit(topExpression));
+            System.out.println(visit(topExpression));
         }
-        // TODO: This return statement needs review.
-        
-        return 2.0;
+        return null;
     }
 
     // The ID referenced below may need to be passed in as a obj of String
     @Override
     public Double visitVarDefTag(CalculatorParser.VarDefTagContext ctx){
-        this.current_scope.getVariables().put(ctx.ID().getText(), this.visit(ctx.expr()));
-        return this.visit(ctx.expr());
+        this.current_scope.getVariables().put(ctx.ID().getText(), visit(ctx.expr()));
+        return visit(ctx.expr());
     }
-
 
     //TODO:
     //@Override
@@ -50,7 +49,7 @@ public class EvalVisitor extends CalculatorBaseVisitor<Double> {
     /* ====================== BOOLEAN EXPR ====================== */ 
     @Override
     public Double visitExprBoolTag(CalculatorParser.ExprBoolTagContext ctx){
-        if(this.visit(ctx.expr()) != 0){
+        if(visit(ctx.expr()) != 0){
             return 1.0;
         }else{
             return 0.0;
@@ -59,7 +58,7 @@ public class EvalVisitor extends CalculatorBaseVisitor<Double> {
 
     @Override
     public Double visitNotBoolTag(CalculatorParser.NotBoolTagContext ctx){
-        if(this.visit(ctx.expr()) != 0){
+        if(visit(ctx.expr()) != 0){
             return 0.0;
         }else{
             return 1.0;
@@ -68,7 +67,7 @@ public class EvalVisitor extends CalculatorBaseVisitor<Double> {
 
     @Override
     public Double visitGtBoolTag(CalculatorParser.GtBoolTagContext ctx){
-        if(this.visit(ctx.expr(0)) > this.visit(ctx.expr(1))){
+        if(visit(ctx.expr(0)) > visit(ctx.expr(1))){
             return 1.0;
         }else{
             return 0.0;
@@ -77,7 +76,7 @@ public class EvalVisitor extends CalculatorBaseVisitor<Double> {
 
     @Override
     public Double visitGteBoolTag(CalculatorParser.GteBoolTagContext ctx){
-        if(this.visit(ctx.expr(0)) >= this.visit(ctx.expr(1))){
+        if(visit(ctx.expr(0)) >= visit(ctx.expr(1))){
             return 1.0;
         }else{
             return 0.0;
@@ -86,7 +85,7 @@ public class EvalVisitor extends CalculatorBaseVisitor<Double> {
 
     @Override
     public Double visitLtBoolTag(CalculatorParser.LtBoolTagContext ctx){
-        if(this.visit(ctx.expr(0)) < this.visit(ctx.expr(1))){
+        if(visit(ctx.expr(0)) < visit(ctx.expr(1))){
             return 1.0;
         }else{
             return 0.0;
@@ -95,7 +94,7 @@ public class EvalVisitor extends CalculatorBaseVisitor<Double> {
 
     @Override
     public Double visitLteBoolTag(CalculatorParser.LteBoolTagContext ctx){
-        if(this.visit(ctx.expr(0)) >= this.visit(ctx.expr(1))){
+        if(visit(ctx.expr(0)) >= visit(ctx.expr(1))){
             return 1.0;
         }else{
             return 0.0;
@@ -104,7 +103,7 @@ public class EvalVisitor extends CalculatorBaseVisitor<Double> {
 
     @Override
     public Double visitEqBoolTag(CalculatorParser.EqBoolTagContext ctx){
-        if(this.visit(ctx.expr(0)) == this.visit(ctx.expr(1))){
+        if(visit(ctx.expr(0)) == visit(ctx.expr(1))){
             return 1.0;
         }else{
             return 0.0;
@@ -113,7 +112,7 @@ public class EvalVisitor extends CalculatorBaseVisitor<Double> {
     
     @Override 
     public Double visitNeqBoolTag(CalculatorParser.NeqBoolTagContext ctx){
-        if(this.visit(ctx.expr(0)) != this.visit(ctx.expr(1))){
+        if(visit(ctx.expr(0)) != visit(ctx.expr(1))){
             return 1.0;
         }else{
             return 0.0;
@@ -122,7 +121,7 @@ public class EvalVisitor extends CalculatorBaseVisitor<Double> {
 
     @Override
     public Double visitAndBoolTag(CalculatorParser.AndBoolTagContext ctx){
-        if(this.visit(ctx.expr(0)) != 0.0 && this.visit(ctx.expr(1)) != 0.0){
+        if(visit(ctx.expr(0)) != 0.0 && visit(ctx.expr(1)) != 0.0){
             return 1.0;
         }else{
             return 0.0;
@@ -131,7 +130,7 @@ public class EvalVisitor extends CalculatorBaseVisitor<Double> {
 
     @Override
     public Double visitOrBoolTag(CalculatorParser.OrBoolTagContext ctx){
-        if(this.visit(ctx.expr(0)) != 0.0 || this.visit(ctx.expr(1)) != 0.0){
+        if(visit(ctx.expr(0)) != 0.0 || visit(ctx.expr(1)) != 0.0){
             return 1.0;
         }else{
             return 0.0;
@@ -142,12 +141,12 @@ public class EvalVisitor extends CalculatorBaseVisitor<Double> {
     /* ====================== SPECIAL EXPR ====================== */ 
     @Override
     public Double visitSqrtExprTag(CalculatorParser.SqrtExprTagContext ctx){
-        if(this.visit(ctx.value) < 0.0){
+        if(visit(ctx.value) < 0.0){
             System.out.println("Error: expression within Sqrt() must be positive.");
             System.exit(0);
-            return -1.0;
+            return null;
         }else{
-            return Math.sqrt(this.visit(ctx.expr()));
+            return Math.sqrt(visit(ctx.expr()));
         }
     }
 
@@ -159,28 +158,28 @@ public class EvalVisitor extends CalculatorBaseVisitor<Double> {
     /* ====================== LIBRARY FUNC ====================== */
     @Override
     public Double visitSinFuncTag(CalculatorParser.SinFuncTagContext ctx){
-        return Math.sin(this.visit(ctx.expr()));
+        return Math.sin(visit(ctx.expr()));
     }
 
     @Override
     public Double visitCosFuncTag(CalculatorParser.CosFuncTagContext ctx){
-        return Math.cos(this.visit(ctx.expr()));
+        return Math.cos(visit(ctx.expr()));
     }
 
     @Override
     public Double visitLogFuncTag(CalculatorParser.LogFuncTagContext ctx){
-        if(this.visit(ctx.expr()) > 0){
-            return Math.log(this.visit(ctx.expr()));
+        if(visit(ctx.expr()) > 0){
+            return Math.log(visit(ctx.expr()));
         }else{
             System.out.println("Error: expression with log() must be greater than 0.");
             System.exit(0);
-            return -1.0;
+            return null;
         }
     }
 
     @Override
     public Double visitExpFuncTag(CalculatorParser.ExpFuncTagContext ctx){
-        return Math.exp(this.visit(ctx.expr()));
+        return Math.exp(visit(ctx.expr()));
     }
 
     /* ====================== PRINT FUNC ====================== */
@@ -188,36 +187,35 @@ public class EvalVisitor extends CalculatorBaseVisitor<Double> {
     public Double visitPrintFuncTag(CalculatorParser.PrintFuncTagContext ctx){
         List<CalculatorParser.ExprContext> statements = ctx.expr();
         for(CalculatorParser.ExprContext statement : statements){
-            prints.add(this.visit(statement));
+            prints.add(visit(statement));
         }
-        // TODO: This return statement needs review.
-        return 1.0;
+        return null;
     }
 
     /* ====================== EXPR ====================== */
     @Override
     public Double visitParenExprTag(CalculatorParser.ParenExprTagContext ctx){
-        return this.visit(ctx.expr());
+        return visit(ctx.expr());
     }
 
     @Override
     public Double visitMulExprTag(CalculatorParser.MulExprTagContext ctx){
-        return this.visit(ctx.expr(0)) * this.visit(ctx.expr(1));
+        return visit(ctx.expr(0)) * visit(ctx.expr(1));
     }
 
     @Override
     public Double visitDivExprTag(CalculatorParser.DivExprTagContext ctx){
-        return this.visit(ctx.expr(0)) / this.visit(ctx.expr(1));
+        return visit(ctx.expr(0)) / visit(ctx.expr(1));
     }
 
     @Override
     public Double visitAddExprTag(CalculatorParser.AddExprTagContext ctx){
-        return this.visit(ctx.expr(0)) + this.visit(ctx.expr(1));
+        return visit(ctx.expr(0)) + visit(ctx.expr(1));
     }
 
     @Override
     public Double visitSubExprTag(CalculatorParser.SubExprTagContext ctx){
-        return this.visit(ctx.expr(0)) - this.visit(ctx.expr(1));
+        return visit(ctx.expr(0)) - visit(ctx.expr(1));
     }
 
     @Override

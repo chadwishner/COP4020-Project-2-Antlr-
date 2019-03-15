@@ -1,17 +1,17 @@
 grammar Calculator;
 
-@header {
+@parser::header {
     package calculator;
 }
 
-parse
-    : exprList EOF
-    ;
+@lexer::header {
+    package calculator;                 
+}
 
 // Top-Most Expression Tree Nodes
 exprList
-    : topExpr ( ';' topExpr)* ';'? #exprListTag
-    ; 
+    : topExpr ( SEMICOLON topExpr)* SEMICOLON? EOF #exprListTag
+    ;
 
 topExpr
     : varDef
@@ -25,61 +25,60 @@ topExpr
     | printFunc 
     ;
 
-// TODO: Don't know how to actually evaluate the expr within the while/if/for statements.
 ifDef
-    : IF SPACE* '(' SPACE* cond=boolExpr SPACE* ')' SPACE* expr1=topExpr (ELSE expr2=topExpr)? #ifDefTag
+    : IF OPAR cond=boolExpr CPAR expr1=topExpr (ELSE expr2=topExpr)? #ifDefTag
     ;
 
 whileDef
-    : WHILE SPACE* '(' SPACE* cond=boolExpr SPACE* ')' SPACE* exec=topExpr #whileDefTag
+    : WHILE OPAR cond=boolExpr CPAR exec=topExpr #whileDefTag
     ;
 
 forDef
-    : FOR SPACE* '(' SPACE* expr1=topExpr SPACE* ';' SPACE* cond=boolExpr SPACE* ';' SPACE* expr2=topExpr SPACE* ')' #forDefTag
+    : FOR OPAR expr1=topExpr SEMICOLON cond=boolExpr SEMICOLON expr2=topExpr CPAR #forDefTag
     ;
 
 // Variable Definitions
 varDef
-    : ID '=' expr #varDefTag
+    : ID ASSIGN expr #varDefTag
     ;
 
 // Print function
 printFunc
-    : PRINT SPACE* expr (SPACE*','SPACE* expr)* #printFuncTag
+    : PRINT expr (COMMA expr)* #printFuncTag
     ;
 
 // Supported Boolean Expressions
 boolExpr
     : expr              #exprBoolTag
-    | op='!' expr       #notBoolTag
-    | expr op='>' expr  #gtBoolTag
-    | expr op='>=' expr #gteBoolTag
-    | expr op='<' expr  #ltBoolTag
-    | expr op='>=' expr #lteBoolTag
-    | expr op='==' expr #eqBoolTag
-    | expr op='!=' expr #neqBoolTag
+    | op=NOT expr       #notBoolTag
+    | expr op=GRE expr  #gtBoolTag
+    | expr op=GREQ expr #gteBoolTag
+    | expr op=LT expr  #ltBoolTag
+    | expr op=LTEQ expr #lteBoolTag
+    | expr op=EQ expr #eqBoolTag
+    | expr op=NEQ expr #neqBoolTag
     // | expr op='===' expr#eqqBoolTag
-    | expr op='&&' expr #andBoolTag
-    | expr op='||' expr #orBoolTag
+    | expr op=AND expr #andBoolTag
+    | expr op=OR expr #orBoolTag
     ;
 
 // Special Expressions
 specialExpr
-    : 'sqrt'SPACE*'(' value=expr SPACE*')'  #sqrtExprTag
-    | 'read'SPACE*'('SPACE*')'              #readExprTag
+    : SQRT OPAR value=expr CPAR  #sqrtExprTag
+    | READ OPAR CPAR              #readExprTag
     ;
 
 // Supported Library Functions
 libraryFunc
-    : 's'SPACE*'(' var=expr SPACE*')' #sinFuncTag
-    | 'c'SPACE*'(' var=expr SPACE*')' #cosFuncTag
-    | 'l'SPACE*'(' var=expr SPACE*')' #logFuncTag
-    | 'e'SPACE*'(' var=expr SPACE*')' #expFuncTag
+    : S OPAR var=expr CPAR #sinFuncTag
+    | C OPAR var=expr CPAR #cosFuncTag
+    | L OPAR var=expr CPAR #logFuncTag
+    | E OPAR var=expr CPAR #expFuncTag
     ;
 
 // Basic arithmetic, variable, and number operations and expressions
 expr
-    : '(' expr ')'  #parenExprTag
+    : OPAR expr CPAR  #parenExprTag
     | expr MUL expr #mulExprTag
     | expr DIV expr #divExprTag
     | expr ADD expr #addExprTag
@@ -88,17 +87,36 @@ expr
     | ID            #idTag
     ;
 
+WS : [ \t\r\n] -> skip ; // Skip White Space
+OPAR: '(';
+CPAR: ')';
+S: 's';
+C: 'c';
+L: 'l';
+E: 'e';
+COMMA: ',';
+SEMICOLON: ';';
+SQRT: 'sqrt';
+READ: 'read';
 PRINT:'print';
 IF: 'if';
 ELSE: 'else';
 WHILE: 'while'; 
 FOR: 'for';
 NUM: [-]?[0-9]+('.'[0-9]*)? ; // Recognize Doubles
-WS : SPACE+ -> skip ; // Skip White Space
 COM : '/*' (.)*? '*/' -> skip ; // Skip Comments
 SUB: '-';
 ADD: '+';
 DIV: '/';
 MUL: '*';
-SPACE: [ \t\r\n];
+EQ: '==';
+ASSIGN: '=';
+NEQ: '!=';
+GRE: '>';
+GREQ: '>=';
+LT: '<';
+LTEQ: '<=';
+AND: '&&';
+OR: '||';
+NOT: '!';
 ID: [_A-Za-z][_A-Za-z0-9]*;

@@ -13,12 +13,6 @@ import org.antlr.v4.runtime.tree.ParseTreeVisitor;
  */
 public interface CalculatorVisitor<T> extends ParseTreeVisitor<T> {
 	/**
-	 * Visit a parse tree produced by {@link CalculatorParser#parse}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitParse(CalculatorParser.ParseContext ctx);
-	/**
 	 * Visit a parse tree produced by the {@code exprListTag}
 	 * labeled alternative in {@link CalculatorParser#exprList}.
 	 * @param ctx the parse tree
