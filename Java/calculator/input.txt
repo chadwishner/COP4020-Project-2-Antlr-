@@ -1,0 +1,83 @@
+/*for loop tests
+	Results: 0.0\n1.0\n2.0\n3.0\n4.0
+*/
+for(n=0; n < 5; n = n +1){
+	print(n);
+}
+
+
+/*while loop tests
+	Results: 0.0\n1.0\n2.0\n3.0\n4.0\n5.0\n5.0\n5.0\n5.0\n5.0\n5.0\n5.0\n5.0\n5.0\n5.0\n5.0\n5.0\n5.0\n5.0\n5.0\n5.0\n5.0\n5.0\n5.0\n5.0\n5.0\n5.0\n5.0\n5.0\n5.0\n5.0\n5.0\n5.0...
+*/
+n = 0;
+while(n < 5){
+	print(n);
+	n = n + 1;
+}
+
+m = 5;
+/*while(n < 6){
+	print(m);
+}
+*/
+
+/*if statement tests
+	Results: 2\n4\n7\n
+*/
+
+if(1)
+	print(2);
+
+if(0)
+	print(3);
+
+if(1){
+	print(4);
+} else {
+	print(5);
+}
+
+if(0){
+	print(6);
+} else {
+	print(7);
+}
+
+/*function tests
+	Results: 4.0\n6.0\n20.0\n0.0\n6.0\n0.0\n0.0\n1.0\n2.0\n3.0\n12.0\n(Whatever was inputed)
+*/
+define double(n){
+	return n*2;
+}
+
+define dubz(n){
+	return (n*2);
+}
+
+define mult(n,m){
+	return n*m;
+}
+
+define add(n){
+	auto m, o, p;
+	print(m);
+	print(n);
+	print(o);
+	print(p);
+	m = 1;
+	o = 2;
+	p = 3;
+	print(m);
+	print(o);
+	print(p);
+
+	return m + n + o + p;
+}
+
+double(2);
+dubz(3);
+mult(4,5);
+add(6);
+
+n = read();
+print(n);
