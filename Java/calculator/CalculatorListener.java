@@ -22,6 +22,18 @@ public interface CalculatorListener extends ParseTreeListener {
 	 */
 	void exitExprListTag(CalculatorParser.ExprListTagContext ctx);
 	/**
+	 * Enter a parse tree produced by the {@code codeBlockTag}
+	 * labeled alternative in {@link CalculatorParser#codeBlock}.
+	 * @param ctx the parse tree
+	 */
+	void enterCodeBlockTag(CalculatorParser.CodeBlockTagContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code codeBlockTag}
+	 * labeled alternative in {@link CalculatorParser#codeBlock}.
+	 * @param ctx the parse tree
+	 */
+	void exitCodeBlockTag(CalculatorParser.CodeBlockTagContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link CalculatorParser#topExpr}.
 	 * @param ctx the parse tree
 	 */
@@ -32,41 +44,131 @@ public interface CalculatorListener extends ParseTreeListener {
 	 */
 	void exitTopExpr(CalculatorParser.TopExprContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code ifDefTag}
+	 * Enter a parse tree produced by the {@code ifDefSingleTag}
 	 * labeled alternative in {@link CalculatorParser#ifDef}.
 	 * @param ctx the parse tree
 	 */
-	void enterIfDefTag(CalculatorParser.IfDefTagContext ctx);
+	void enterIfDefSingleTag(CalculatorParser.IfDefSingleTagContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code ifDefTag}
+	 * Exit a parse tree produced by the {@code ifDefSingleTag}
 	 * labeled alternative in {@link CalculatorParser#ifDef}.
 	 * @param ctx the parse tree
 	 */
-	void exitIfDefTag(CalculatorParser.IfDefTagContext ctx);
+	void exitIfDefSingleTag(CalculatorParser.IfDefSingleTagContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code whileDefTag}
+	 * Enter a parse tree produced by the {@code ifDefMultipleTag}
+	 * labeled alternative in {@link CalculatorParser#ifDef}.
+	 * @param ctx the parse tree
+	 */
+	void enterIfDefMultipleTag(CalculatorParser.IfDefMultipleTagContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code ifDefMultipleTag}
+	 * labeled alternative in {@link CalculatorParser#ifDef}.
+	 * @param ctx the parse tree
+	 */
+	void exitIfDefMultipleTag(CalculatorParser.IfDefMultipleTagContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code whileDefSingleTag}
 	 * labeled alternative in {@link CalculatorParser#whileDef}.
 	 * @param ctx the parse tree
 	 */
-	void enterWhileDefTag(CalculatorParser.WhileDefTagContext ctx);
+	void enterWhileDefSingleTag(CalculatorParser.WhileDefSingleTagContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code whileDefTag}
+	 * Exit a parse tree produced by the {@code whileDefSingleTag}
 	 * labeled alternative in {@link CalculatorParser#whileDef}.
 	 * @param ctx the parse tree
 	 */
-	void exitWhileDefTag(CalculatorParser.WhileDefTagContext ctx);
+	void exitWhileDefSingleTag(CalculatorParser.WhileDefSingleTagContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code forDefTag}
+	 * Enter a parse tree produced by the {@code whileDefMultipleTag}
+	 * labeled alternative in {@link CalculatorParser#whileDef}.
+	 * @param ctx the parse tree
+	 */
+	void enterWhileDefMultipleTag(CalculatorParser.WhileDefMultipleTagContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code whileDefMultipleTag}
+	 * labeled alternative in {@link CalculatorParser#whileDef}.
+	 * @param ctx the parse tree
+	 */
+	void exitWhileDefMultipleTag(CalculatorParser.WhileDefMultipleTagContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code forDefSingleTag}
 	 * labeled alternative in {@link CalculatorParser#forDef}.
 	 * @param ctx the parse tree
 	 */
-	void enterForDefTag(CalculatorParser.ForDefTagContext ctx);
+	void enterForDefSingleTag(CalculatorParser.ForDefSingleTagContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code forDefTag}
+	 * Exit a parse tree produced by the {@code forDefSingleTag}
 	 * labeled alternative in {@link CalculatorParser#forDef}.
 	 * @param ctx the parse tree
 	 */
-	void exitForDefTag(CalculatorParser.ForDefTagContext ctx);
+	void exitForDefSingleTag(CalculatorParser.ForDefSingleTagContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code forDefMultipleTag}
+	 * labeled alternative in {@link CalculatorParser#forDef}.
+	 * @param ctx the parse tree
+	 */
+	void enterForDefMultipleTag(CalculatorParser.ForDefMultipleTagContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code forDefMultipleTag}
+	 * labeled alternative in {@link CalculatorParser#forDef}.
+	 * @param ctx the parse tree
+	 */
+	void exitForDefMultipleTag(CalculatorParser.ForDefMultipleTagContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code funcDefTag}
+	 * labeled alternative in {@link CalculatorParser#funcDef}.
+	 * @param ctx the parse tree
+	 */
+	void enterFuncDefTag(CalculatorParser.FuncDefTagContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code funcDefTag}
+	 * labeled alternative in {@link CalculatorParser#funcDef}.
+	 * @param ctx the parse tree
+	 */
+	void exitFuncDefTag(CalculatorParser.FuncDefTagContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code funcCallTag}
+	 * labeled alternative in {@link CalculatorParser#funcCall}.
+	 * @param ctx the parse tree
+	 */
+	void enterFuncCallTag(CalculatorParser.FuncCallTagContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code funcCallTag}
+	 * labeled alternative in {@link CalculatorParser#funcCall}.
+	 * @param ctx the parse tree
+	 */
+	void exitFuncCallTag(CalculatorParser.FuncCallTagContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CalculatorParser#params}.
+	 * @param ctx the parse tree
+	 */
+	void enterParams(CalculatorParser.ParamsContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CalculatorParser#params}.
+	 * @param ctx the parse tree
+	 */
+	void exitParams(CalculatorParser.ParamsContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CalculatorParser#paramValues}.
+	 * @param ctx the parse tree
+	 */
+	void enterParamValues(CalculatorParser.ParamValuesContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CalculatorParser#paramValues}.
+	 * @param ctx the parse tree
+	 */
+	void exitParamValues(CalculatorParser.ParamValuesContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CalculatorParser#autoVars}.
+	 * @param ctx the parse tree
+	 */
+	void enterAutoVars(CalculatorParser.AutoVarsContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CalculatorParser#autoVars}.
+	 * @param ctx the parse tree
+	 */
+	void exitAutoVars(CalculatorParser.AutoVarsContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code varDefTag}
 	 * labeled alternative in {@link CalculatorParser#varDef}.
@@ -79,6 +181,18 @@ public interface CalculatorListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitVarDefTag(CalculatorParser.VarDefTagContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code varDefFuncCallTag}
+	 * labeled alternative in {@link CalculatorParser#varDef}.
+	 * @param ctx the parse tree
+	 */
+	void enterVarDefFuncCallTag(CalculatorParser.VarDefFuncCallTagContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code varDefFuncCallTag}
+	 * labeled alternative in {@link CalculatorParser#varDef}.
+	 * @param ctx the parse tree
+	 */
+	void exitVarDefFuncCallTag(CalculatorParser.VarDefFuncCallTagContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code printFuncTag}
 	 * labeled alternative in {@link CalculatorParser#printFunc}.

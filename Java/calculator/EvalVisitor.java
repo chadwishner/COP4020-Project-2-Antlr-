@@ -2,49 +2,161 @@ package calculator;
 
 import java.util.HashMap;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.lang.Math;
 import java.util.Scanner;
 
+import calculator.CalculatorParser.TopExprContext;
+
 public class EvalVisitor extends CalculatorBaseVisitor<Double> {
 
     List<Double> prints = new ArrayList<Double>();
+    HashMap<String, CalculatorParser.ParamsContext> functions_params = new HashMap<String, >();
+    HashMap<String, CalculatorParser.AutoVarsContext> functions_auto_variables = new HashMap<String, >();
+    HashMap<String, List<CalculatorParser.TopExprContext>> functions_exec = new HashMap<String, >();
     Scanner scan = new Scanner(System.in);
 
     // Create a new global scope, of which new sub-scopes will be created from.
     Scope global_scope = new Scope(null, true);
     Scope current_scope = global_scope;
 
-   @Override public Double visitTopExpr(CalculatorParser.TopExprContext ctx) { return visitChildren(ctx); }
-
     @Override
     public Double visitExprListTag(CalculatorParser.ExprListTagContext ctx){
         List<CalculatorParser.TopExprContext> topExpressions = ctx.topExpr();
         for(CalculatorParser.TopExprContext topExpression : topExpressions){
-            System.out.println(visit(topExpression));
+            Double val = visit(topExpression);
+            if(val != null){
+                System.out.println(val);
+            }
         }
         return null;
     }
 
-    // The ID referenced below may need to be passed in as a obj of String
+    @Override public Double visitTopExpr(CalculatorParser.TopExprContext ctx) {
+        return visit(ctx.children.get(0)); 
+    }
+
+    /* ====================== VARIABLE DEFINITIONS ====================== */
     @Override
     public Double visitVarDefTag(CalculatorParser.VarDefTagContext ctx){
         this.current_scope.getVariables().put(ctx.ID().getText(), visit(ctx.expr()));
-        return visit(ctx.expr());
+        return null;
     }
 
-    //TODO:
-    //@Override
-    //public void visitIfDef(CalculatorParser.ifDefContext ctx){}
+    @Override
+    public Double visitVarDefFuncCallTag(CalculatorParser.VarDefFuncCallTagContext ctx){
+        this.current_scope.getVariables().put(ctx.ID().getText(), visit(ctx.funcCall()));
+        return null;
+    }
 
-    //TODO:
-    //@Override
-    //public void visitForDef(CalculatorParser.forDefContext ctx){}
+    /* ====================== IF STATEMENTS ====================== */ 
+    @Override
+    public Double visitIfDefSingleTag(CalculatorParser.IfDefSingleTagContext ctx){
+        if(visit(ctx.cond) != 0.0){
+            return visit(ctx.expr1);
+        }else{
+            if(ctx.expr2 != null){
+                return visit(ctx.expr2);
+            }
+        }
+        return null;
+    }
 
-    //TODO:
-    //@Override
-    //public void visitWhileDef(CalculatorParser.whileDefContext ctx){}
+    @Override
+    public Double visitIfDefMultipleTag(CalculatorParser.IfDefMultipleTagContext ctx){
+        if(visit(ctx.cond) != 0.0){
+            return visit(ctx.exprList1);
+        }else{
+            if(ctx.exprList2 != null){
+                return visit(ctx.exprList2);
+            }
+        }
+        return null;
+    }
 
+    /* ====================== CODE BLOCK ====================== */
+    @Override
+    public Double visitCodeBlockTag(CalculatorParser.CodeBlockTagContext ctx) {
+        List<CalculatorParser.TopExprContext> topExpressions = ctx.topExpr();
+        for(CalculatorParser.TopExprContext topExpression : topExpressions){
+            Double val = visit(topExpression);
+            if(val != null){
+                System.out.println(val);
+            }
+        }
+        return null;
+    }
+
+    /* ====================== FOR LOOPS ====================== */ 
+    @Override 
+    public Double visitForDefSingleTag(CalculatorParser.ForDefSingleTagContext ctx) {
+        visit(ctx.expr1);
+        while(visit(ctx.cond) != 0.0){
+            visit(ctx.exec);
+            visit(ctx.expr2);
+        }
+        return null;
+    }
+
+    @Override 
+    public Double visitForDefMultipleTag(CalculatorParser.ForDefMultipleTagContext ctx) {
+        System.out.println("Visting FOR-def");
+        visit(ctx.expr1);
+        while(visit(ctx.cond) != 0.0){
+            visit(ctx.exec);
+            visit(ctx.expr2);
+        }
+        return null;
+    }
+
+    /* ====================== WHILE LOOP ====================== */ 
+    @Override 
+    public Double visitWhileDefSingleTag(CalculatorParser.WhileDefSingleTagContext ctx) {
+        while(visit(ctx.cond) != 0.0){
+            visit(ctx.exec);
+        }
+        return null;
+    }
+
+    @Override 
+    public Double visitWhileDefMultipleTag(CalculatorParser.WhileDefMultipleTagContext ctx) {
+        while(visit(ctx.cond) != 0.0){
+            visit(ctx.exec);
+        }
+        return null;
+    }
+
+    /* ====================== FUNCTIONS ====================== */
+    @Override 
+    public Double visitFuncDefTag(CalculatorParser.FuncDefTagContext ctx) { 
+        // Add the function and its params, variables, and codeSegment to a series of global functions hashmaps.
+        String func_name = ctx.funcName.getText();
+        this.functions_auto_variables.put(func_name, ctx.autoVars());
+        this.functions_params.put(func_name, ctx.params());
+        this.functions_exec.put(func_name, ctx.exec);
+        return null;
+    }
+
+    @Override
+    public Double visitFuncCallTag(CalculatorParser.FuncCallTagContext ctx){
+        String func_name = ctx.ID().getText();
+        if(this.functions.containsKey(func_name)){
+            // Create a new scope for the function
+            Scope func_scope = new Scope(this.current_scope, false);
+            this.current_scope = func_scope;
+            CalculatorParser.ParamValuesContext param_values = ctx.paramValues();
+            
+            
+            // Remove the scope from the function
+            this.current_scope = this.current_scope.getParentScope();
+            return null;
+        }else{
+            System.out.println("Invalid function call/That function does not exist.");
+            return null;
+        }
+        
+    }
 
     /* ====================== BOOLEAN EXPR ====================== */ 
     @Override
@@ -189,6 +301,11 @@ public class EvalVisitor extends CalculatorBaseVisitor<Double> {
         for(CalculatorParser.ExprContext statement : statements){
             prints.add(visit(statement));
         }
+        for(Double item : prints){
+            System.out.println(item);
+        }
+        prints.clear();
+
         return null;
     }
 
@@ -217,7 +334,7 @@ public class EvalVisitor extends CalculatorBaseVisitor<Double> {
     public Double visitSubExprTag(CalculatorParser.SubExprTagContext ctx){
         return visit(ctx.expr(0)) - visit(ctx.expr(1));
     }
-
+    
     @Override
     public Double visitNumExprTag(CalculatorParser.NumExprTagContext ctx){
         return Double.valueOf(ctx.getText());

@@ -8,38 +8,77 @@ grammar Calculator;
     package calculator;                 
 }
 
-// Top-Most Expression Tree Nodes
+// Top-Level Expression + Parser Entry Point
 exprList
-    : topExpr ( SEMICOLON topExpr)* SEMICOLON? EOF #exprListTag
+    : topExpr+ EOF #exprListTag
     ;
 
+// Code blocks for loops/functions
+codeBlock
+    : OBRC topExpr* CBRC #codeBlockTag
+    ;
+
+// Should cover all types of expressions
 topExpr
-    : varDef
-    | ifDef
+    : ifDef
     | forDef
     | whileDef
-    | boolExpr      
-    | specialExpr   
-    | libraryFunc   
-    | expr          
-    | printFunc 
+    | funcDef
+    | funcCall SEMICOLON
+    | expr SEMICOLON
+    | varDef SEMICOLON
+    | boolExpr SEMICOLON
+    | specialExpr SEMICOLON
+    | libraryFunc SEMICOLON
+    | printFunc SEMICOLON
     ;
 
+// If Definitions
 ifDef
-    : IF OPAR cond=boolExpr CPAR expr1=topExpr (ELSE expr2=topExpr)? #ifDefTag
+    : IF OPAR cond=boolExpr CPAR expr1=topExpr ( ELSE expr2=topExpr )? #ifDefSingleTag
+    | IF OPAR cond=boolExpr CPAR exprList1=codeBlock (ELSE exprList2=codeBlock)? #ifDefMultipleTag
     ;
 
+// While Loops
 whileDef
-    : WHILE OPAR cond=boolExpr CPAR exec=topExpr #whileDefTag
+    : WHILE OPAR cond=boolExpr CPAR exec=topExpr #whileDefSingleTag
+    | WHILE OPAR cond=boolExpr CPAR exec=codeBlock #whileDefMultipleTag
     ;
 
+// For Loops
 forDef
-    : FOR OPAR expr1=topExpr SEMICOLON cond=boolExpr SEMICOLON expr2=topExpr CPAR #forDefTag
+    : FOR OPAR expr1=varDef SEMICOLON cond=boolExpr SEMICOLON expr2=varDef CPAR exec=topExpr #forDefSingleTag
+    | FOR OPAR expr1=varDef SEMICOLON cond=boolExpr SEMICOLON expr2=varDef CPAR exec=codeBlock #forDefMultipleTag
+    ;
+
+// Function Defintions
+funcDef
+    : DEFINE funcName=ID params OBRC autoVars exec=topExpr+ CBRC #funcDefTag
+    ;
+
+// Function Calls
+funcCall
+    : ID paramValues #funcCallTag
+    ;
+
+// Params for the function Def
+params
+    : OPAR ID (COMMA ID)* CPAR
+    ;
+
+paramValues
+    : OPAR NUM (COMMA NUM)* CPAR
+    ;
+
+// Auto variables for the function Def
+autoVars
+    : AUTO ID (COMMA ID)* SEMICOLON?
     ;
 
 // Variable Definitions
 varDef
     : ID ASSIGN expr #varDefTag
+    | ID ASSIGN funcCall #varDefFuncCallTag
     ;
 
 // Print function
@@ -57,7 +96,6 @@ boolExpr
     | expr op=LTEQ expr #lteBoolTag
     | expr op=EQ expr #eqBoolTag
     | expr op=NEQ expr #neqBoolTag
-    // | expr op='===' expr#eqqBoolTag
     | expr op=AND expr #andBoolTag
     | expr op=OR expr #orBoolTag
     ;
@@ -79,28 +117,32 @@ libraryFunc
 // Basic arithmetic, variable, and number operations and expressions
 expr
     : OPAR expr CPAR  #parenExprTag
-    | expr MUL expr #mulExprTag
-    | expr DIV expr #divExprTag
-    | expr ADD expr #addExprTag
-    | expr SUB expr #subExprTag
-    | NUM           #numExprTag
-    | ID            #idTag
+    | expr MUL expr   #mulExprTag
+    | expr DIV expr   #divExprTag
+    | expr ADD expr   #addExprTag
+    | expr SUB expr   #subExprTag
+    | NUM             #numExprTag
+    | ID              #idTag
     ;
 
 WS : [ \t\r\n] -> skip ; // Skip White Space
+IF: 'if';
+ELSE: 'else';
 OPAR: '(';
 CPAR: ')';
+OBRC: '{';
+CBRC: '}';
 S: 's';
 C: 'c';
 L: 'l';
 E: 'e';
 COMMA: ',';
 SEMICOLON: ';';
+DEFINE: 'define';
+AUTO: 'auto';
 SQRT: 'sqrt';
 READ: 'read';
 PRINT:'print';
-IF: 'if';
-ELSE: 'else';
 WHILE: 'while'; 
 FOR: 'for';
 NUM: [-]?[0-9]+('.'[0-9]*)? ; // Recognize Doubles

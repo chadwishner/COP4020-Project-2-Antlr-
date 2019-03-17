@@ -20,32 +20,92 @@ public interface CalculatorVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitExprListTag(CalculatorParser.ExprListTagContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code codeBlockTag}
+	 * labeled alternative in {@link CalculatorParser#codeBlock}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCodeBlockTag(CalculatorParser.CodeBlockTagContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link CalculatorParser#topExpr}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitTopExpr(CalculatorParser.TopExprContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code ifDefTag}
+	 * Visit a parse tree produced by the {@code ifDefSingleTag}
 	 * labeled alternative in {@link CalculatorParser#ifDef}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitIfDefTag(CalculatorParser.IfDefTagContext ctx);
+	T visitIfDefSingleTag(CalculatorParser.IfDefSingleTagContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code whileDefTag}
+	 * Visit a parse tree produced by the {@code ifDefMultipleTag}
+	 * labeled alternative in {@link CalculatorParser#ifDef}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitIfDefMultipleTag(CalculatorParser.IfDefMultipleTagContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code whileDefSingleTag}
 	 * labeled alternative in {@link CalculatorParser#whileDef}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitWhileDefTag(CalculatorParser.WhileDefTagContext ctx);
+	T visitWhileDefSingleTag(CalculatorParser.WhileDefSingleTagContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code forDefTag}
+	 * Visit a parse tree produced by the {@code whileDefMultipleTag}
+	 * labeled alternative in {@link CalculatorParser#whileDef}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitWhileDefMultipleTag(CalculatorParser.WhileDefMultipleTagContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code forDefSingleTag}
 	 * labeled alternative in {@link CalculatorParser#forDef}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitForDefTag(CalculatorParser.ForDefTagContext ctx);
+	T visitForDefSingleTag(CalculatorParser.ForDefSingleTagContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code forDefMultipleTag}
+	 * labeled alternative in {@link CalculatorParser#forDef}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitForDefMultipleTag(CalculatorParser.ForDefMultipleTagContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code funcDefTag}
+	 * labeled alternative in {@link CalculatorParser#funcDef}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFuncDefTag(CalculatorParser.FuncDefTagContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code funcCallTag}
+	 * labeled alternative in {@link CalculatorParser#funcCall}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFuncCallTag(CalculatorParser.FuncCallTagContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CalculatorParser#params}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitParams(CalculatorParser.ParamsContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CalculatorParser#paramValues}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitParamValues(CalculatorParser.ParamValuesContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CalculatorParser#autoVars}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAutoVars(CalculatorParser.AutoVarsContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code varDefTag}
 	 * labeled alternative in {@link CalculatorParser#varDef}.
@@ -53,6 +113,13 @@ public interface CalculatorVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitVarDefTag(CalculatorParser.VarDefTagContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code varDefFuncCallTag}
+	 * labeled alternative in {@link CalculatorParser#varDef}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitVarDefFuncCallTag(CalculatorParser.VarDefFuncCallTagContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code printFuncTag}
 	 * labeled alternative in {@link CalculatorParser#printFunc}.
