@@ -194,6 +194,42 @@ public interface CalculatorListener extends ParseTreeListener {
 	 */
 	void exitVarDefFuncCallTag(CalculatorParser.VarDefFuncCallTagContext ctx);
 	/**
+	 * Enter a parse tree produced by the {@code varDefBoolExprTag}
+	 * labeled alternative in {@link CalculatorParser#varDef}.
+	 * @param ctx the parse tree
+	 */
+	void enterVarDefBoolExprTag(CalculatorParser.VarDefBoolExprTagContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code varDefBoolExprTag}
+	 * labeled alternative in {@link CalculatorParser#varDef}.
+	 * @param ctx the parse tree
+	 */
+	void exitVarDefBoolExprTag(CalculatorParser.VarDefBoolExprTagContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code varDefSpecialExprTag}
+	 * labeled alternative in {@link CalculatorParser#varDef}.
+	 * @param ctx the parse tree
+	 */
+	void enterVarDefSpecialExprTag(CalculatorParser.VarDefSpecialExprTagContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code varDefSpecialExprTag}
+	 * labeled alternative in {@link CalculatorParser#varDef}.
+	 * @param ctx the parse tree
+	 */
+	void exitVarDefSpecialExprTag(CalculatorParser.VarDefSpecialExprTagContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code varDefLibraryFuncTag}
+	 * labeled alternative in {@link CalculatorParser#varDef}.
+	 * @param ctx the parse tree
+	 */
+	void enterVarDefLibraryFuncTag(CalculatorParser.VarDefLibraryFuncTagContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code varDefLibraryFuncTag}
+	 * labeled alternative in {@link CalculatorParser#varDef}.
+	 * @param ctx the parse tree
+	 */
+	void exitVarDefLibraryFuncTag(CalculatorParser.VarDefLibraryFuncTagContext ctx);
+	/**
 	 * Enter a parse tree produced by the {@code printFuncTag}
 	 * labeled alternative in {@link CalculatorParser#printFunc}.
 	 * @param ctx the parse tree

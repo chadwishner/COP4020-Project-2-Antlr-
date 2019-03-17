@@ -210,6 +210,42 @@ public class CalculatorBaseListener implements CalculatorListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterVarDefBoolExprTag(CalculatorParser.VarDefBoolExprTagContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitVarDefBoolExprTag(CalculatorParser.VarDefBoolExprTagContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterVarDefSpecialExprTag(CalculatorParser.VarDefSpecialExprTagContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitVarDefSpecialExprTag(CalculatorParser.VarDefSpecialExprTagContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterVarDefLibraryFuncTag(CalculatorParser.VarDefLibraryFuncTagContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitVarDefLibraryFuncTag(CalculatorParser.VarDefLibraryFuncTagContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterPrintFuncTag(CalculatorParser.PrintFuncTagContext ctx) { }
 	/**
 	 * {@inheritDoc}

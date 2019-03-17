@@ -1,4 +1,4 @@
-// Generated from Calculator.g4 by ANTLR 4.7.2
+// Generated from c:\Users\Spectre\Documents\COP4020\Project2\COP4020-Project-2-Antlr-\Java\calculator\Calculator.g4 by ANTLR 4.7.1
 
     package calculator;
 
@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 @SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})
 public class CalculatorParser extends Parser {
-	static { RuntimeMetaData.checkVersion("4.7.2", RuntimeMetaData.VERSION); }
+	static { RuntimeMetaData.checkVersion("4.7.1", RuntimeMetaData.VERSION); }
 
 	protected static final DFA[] _decisionToDFA;
 	protected static final PredictionContextCache _sharedContextCache =
@@ -30,34 +30,25 @@ public class CalculatorParser extends Parser {
 		RULE_params = 8, RULE_paramValues = 9, RULE_autoVars = 10, RULE_varDef = 11, 
 		RULE_printFunc = 12, RULE_boolExpr = 13, RULE_specialExpr = 14, RULE_libraryFunc = 15, 
 		RULE_expr = 16;
-	private static String[] makeRuleNames() {
-		return new String[] {
-			"exprList", "codeBlock", "topExpr", "ifDef", "whileDef", "forDef", "funcDef", 
-			"funcCall", "params", "paramValues", "autoVars", "varDef", "printFunc", 
-			"boolExpr", "specialExpr", "libraryFunc", "expr"
-		};
-	}
-	public static final String[] ruleNames = makeRuleNames();
+	public static final String[] ruleNames = {
+		"exprList", "codeBlock", "topExpr", "ifDef", "whileDef", "forDef", "funcDef", 
+		"funcCall", "params", "paramValues", "autoVars", "varDef", "printFunc", 
+		"boolExpr", "specialExpr", "libraryFunc", "expr"
+	};
 
-	private static String[] makeLiteralNames() {
-		return new String[] {
-			null, null, "'if'", "'else'", "'('", "')'", "'{'", "'}'", "'s'", "'c'", 
-			"'l'", "'e'", "','", "';'", "'define'", "'auto'", "'return'", "'sqrt'", 
-			"'read'", "'print'", "'while'", "'for'", null, null, "'-'", "'+'", "'/'", 
-			"'*'", "'=='", "'='", "'!='", "'>'", "'>='", "'<'", "'<='", "'&&'", "'||'", 
-			"'!'"
-		};
-	}
-	private static final String[] _LITERAL_NAMES = makeLiteralNames();
-	private static String[] makeSymbolicNames() {
-		return new String[] {
-			null, "WS", "IF", "ELSE", "OPAR", "CPAR", "OBRC", "CBRC", "S", "C", "L", 
-			"E", "COMMA", "SEMICOLON", "DEFINE", "AUTO", "RETURN", "SQRT", "READ", 
-			"PRINT", "WHILE", "FOR", "NUM", "COM", "SUB", "ADD", "DIV", "MUL", "EQ", 
-			"ASSIGN", "NEQ", "GRE", "GREQ", "LT", "LTEQ", "AND", "OR", "NOT", "ID"
-		};
-	}
-	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
+	private static final String[] _LITERAL_NAMES = {
+		null, null, "'if'", "'else'", "'('", "')'", "'{'", "'}'", "'s'", "'c'", 
+		"'l'", "'e'", "','", "';'", "'define'", "'auto'", "'return'", "'sqrt'", 
+		"'read'", "'print'", "'while'", "'for'", null, null, "'-'", "'+'", "'/'", 
+		"'*'", "'=='", "'='", "'!='", "'>'", "'>='", "'<'", "'<='", "'&&'", "'||'", 
+		"'!'"
+	};
+	private static final String[] _SYMBOLIC_NAMES = {
+		null, "WS", "IF", "ELSE", "OPAR", "CPAR", "OBRC", "CBRC", "S", "C", "L", 
+		"E", "COMMA", "SEMICOLON", "DEFINE", "AUTO", "RETURN", "SQRT", "READ", 
+		"PRINT", "WHILE", "FOR", "NUM", "COM", "SUB", "ADD", "DIV", "MUL", "EQ", 
+		"ASSIGN", "NEQ", "GRE", "GREQ", "LT", "LTEQ", "AND", "OR", "NOT", "ID"
+	};
 	public static final Vocabulary VOCABULARY = new VocabularyImpl(_LITERAL_NAMES, _SYMBOLIC_NAMES);
 
 	/**
@@ -107,7 +98,6 @@ public class CalculatorParser extends Parser {
 		super(input);
 		_interp = new ParserATNSimulator(this,_ATN,_decisionToDFA,_sharedContextCache);
 	}
-
 	public static class ExprListContext extends ParserRuleContext {
 		public ExprListContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -128,19 +118,6 @@ public class CalculatorParser extends Parser {
 			return getRuleContext(TopExprContext.class,i);
 		}
 		public ExprListTagContext(ExprListContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).enterExprListTag(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).exitExprListTag(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CalculatorVisitor ) return ((CalculatorVisitor<? extends T>)visitor).visitExprListTag(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final ExprListContext exprList() throws RecognitionException {
@@ -199,19 +176,6 @@ public class CalculatorParser extends Parser {
 			return getRuleContext(TopExprContext.class,i);
 		}
 		public CodeBlockTagContext(CodeBlockContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).enterCodeBlockTag(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).exitCodeBlockTag(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CalculatorVisitor ) return ((CalculatorVisitor<? extends T>)visitor).visitCodeBlockTag(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final CodeBlockContext codeBlock() throws RecognitionException {
@@ -288,19 +252,6 @@ public class CalculatorParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_topExpr; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).enterTopExpr(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).exitTopExpr(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CalculatorVisitor ) return ((CalculatorVisitor<? extends T>)visitor).visitTopExpr(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final TopExprContext topExpr() throws RecognitionException {
@@ -451,19 +402,6 @@ public class CalculatorParser extends Parser {
 		}
 		public TerminalNode ELSE() { return getToken(CalculatorParser.ELSE, 0); }
 		public IfDefMultipleTagContext(IfDefContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).enterIfDefMultipleTag(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).exitIfDefMultipleTag(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CalculatorVisitor ) return ((CalculatorVisitor<? extends T>)visitor).visitIfDefMultipleTag(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 	public static class IfDefSingleTagContext extends IfDefContext {
 		public BoolExprContext cond;
@@ -483,19 +421,6 @@ public class CalculatorParser extends Parser {
 		}
 		public TerminalNode ELSE() { return getToken(CalculatorParser.ELSE, 0); }
 		public IfDefSingleTagContext(IfDefContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).enterIfDefSingleTag(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).exitIfDefSingleTag(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CalculatorVisitor ) return ((CalculatorVisitor<? extends T>)visitor).visitIfDefSingleTag(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final IfDefContext ifDef() throws RecognitionException {
@@ -608,19 +533,6 @@ public class CalculatorParser extends Parser {
 			return getRuleContext(CodeBlockContext.class,0);
 		}
 		public WhileDefMultipleTagContext(WhileDefContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).enterWhileDefMultipleTag(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).exitWhileDefMultipleTag(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CalculatorVisitor ) return ((CalculatorVisitor<? extends T>)visitor).visitWhileDefMultipleTag(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 	public static class WhileDefSingleTagContext extends WhileDefContext {
 		public BoolExprContext cond;
@@ -635,19 +547,6 @@ public class CalculatorParser extends Parser {
 			return getRuleContext(TopExprContext.class,0);
 		}
 		public WhileDefSingleTagContext(WhileDefContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).enterWhileDefSingleTag(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).exitWhileDefSingleTag(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CalculatorVisitor ) return ((CalculatorVisitor<? extends T>)visitor).visitWhileDefSingleTag(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final WhileDefContext whileDef() throws RecognitionException {
@@ -744,19 +643,6 @@ public class CalculatorParser extends Parser {
 			return getRuleContext(CodeBlockContext.class,0);
 		}
 		public ForDefMultipleTagContext(ForDefContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).enterForDefMultipleTag(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).exitForDefMultipleTag(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CalculatorVisitor ) return ((CalculatorVisitor<? extends T>)visitor).visitForDefMultipleTag(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 	public static class ForDefSingleTagContext extends ForDefContext {
 		public VarDefContext expr1;
@@ -783,19 +669,6 @@ public class CalculatorParser extends Parser {
 			return getRuleContext(TopExprContext.class,0);
 		}
 		public ForDefSingleTagContext(ForDefContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).enterForDefSingleTag(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).exitForDefSingleTag(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CalculatorVisitor ) return ((CalculatorVisitor<? extends T>)visitor).visitForDefSingleTag(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final ForDefContext forDef() throws RecognitionException {
@@ -908,19 +781,6 @@ public class CalculatorParser extends Parser {
 			return getRuleContext(CodeBlockContext.class,i);
 		}
 		public FuncDefTagContext(FuncDefContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).enterFuncDefTag(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).exitFuncDefTag(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CalculatorVisitor ) return ((CalculatorVisitor<? extends T>)visitor).visitFuncDefTag(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final FuncDefContext funcDef() throws RecognitionException {
@@ -1015,19 +875,6 @@ public class CalculatorParser extends Parser {
 			return getRuleContext(ParamValuesContext.class,0);
 		}
 		public FuncCallTagContext(FuncCallContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).enterFuncCallTag(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).exitFuncCallTag(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CalculatorVisitor ) return ((CalculatorVisitor<? extends T>)visitor).visitFuncCallTag(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final FuncCallContext funcCall() throws RecognitionException {
@@ -1078,19 +925,6 @@ public class CalculatorParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_params; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).enterParams(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).exitParams(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CalculatorVisitor ) return ((CalculatorVisitor<? extends T>)visitor).visitParams(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final ParamsContext params() throws RecognitionException {
@@ -1150,19 +984,6 @@ public class CalculatorParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_paramValues; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).enterParamValues(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).exitParamValues(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CalculatorVisitor ) return ((CalculatorVisitor<? extends T>)visitor).visitParamValues(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final ParamValuesContext paramValues() throws RecognitionException {
@@ -1222,19 +1043,6 @@ public class CalculatorParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_autoVars; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).enterAutoVars(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).exitAutoVars(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CalculatorVisitor ) return ((CalculatorVisitor<? extends T>)visitor).visitAutoVars(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final AutoVarsContext autoVars() throws RecognitionException {
@@ -1305,19 +1113,6 @@ public class CalculatorParser extends Parser {
 			return getRuleContext(ExprContext.class,0);
 		}
 		public VarDefTagContext(VarDefContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).enterVarDefTag(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).exitVarDefTag(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CalculatorVisitor ) return ((CalculatorVisitor<? extends T>)visitor).visitVarDefTag(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 	public static class VarDefFuncCallTagContext extends VarDefContext {
 		public TerminalNode ID() { return getToken(CalculatorParser.ID, 0); }
@@ -1326,19 +1121,6 @@ public class CalculatorParser extends Parser {
 			return getRuleContext(FuncCallContext.class,0);
 		}
 		public VarDefFuncCallTagContext(VarDefContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).enterVarDefFuncCallTag(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).exitVarDefFuncCallTag(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CalculatorVisitor ) return ((CalculatorVisitor<? extends T>)visitor).visitVarDefFuncCallTag(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 	public static class VarDefSpecialExprTagContext extends VarDefContext {
 		public TerminalNode ID() { return getToken(CalculatorParser.ID, 0); }
@@ -1347,19 +1129,6 @@ public class CalculatorParser extends Parser {
 			return getRuleContext(SpecialExprContext.class,0);
 		}
 		public VarDefSpecialExprTagContext(VarDefContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).enterVarDefSpecialExprTag(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).exitVarDefSpecialExprTag(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CalculatorVisitor ) return ((CalculatorVisitor<? extends T>)visitor).visitVarDefSpecialExprTag(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 	public static class VarDefBoolExprTagContext extends VarDefContext {
 		public TerminalNode ID() { return getToken(CalculatorParser.ID, 0); }
@@ -1368,19 +1137,6 @@ public class CalculatorParser extends Parser {
 			return getRuleContext(BoolExprContext.class,0);
 		}
 		public VarDefBoolExprTagContext(VarDefContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).enterVarDefBoolExprTag(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).exitVarDefBoolExprTag(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CalculatorVisitor ) return ((CalculatorVisitor<? extends T>)visitor).visitVarDefBoolExprTag(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 	public static class VarDefLibraryFuncTagContext extends VarDefContext {
 		public TerminalNode ID() { return getToken(CalculatorParser.ID, 0); }
@@ -1389,19 +1145,6 @@ public class CalculatorParser extends Parser {
 			return getRuleContext(LibraryFuncContext.class,0);
 		}
 		public VarDefLibraryFuncTagContext(VarDefContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).enterVarDefLibraryFuncTag(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).exitVarDefLibraryFuncTag(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CalculatorVisitor ) return ((CalculatorVisitor<? extends T>)visitor).visitVarDefLibraryFuncTag(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final VarDefContext varDef() throws RecognitionException {
@@ -1508,19 +1251,6 @@ public class CalculatorParser extends Parser {
 			return getToken(CalculatorParser.COMMA, i);
 		}
 		public PrintFuncTagContext(PrintFuncContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).enterPrintFuncTag(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).exitPrintFuncTag(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CalculatorVisitor ) return ((CalculatorVisitor<? extends T>)visitor).visitPrintFuncTag(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final PrintFuncContext printFunc() throws RecognitionException {
@@ -1585,19 +1315,6 @@ public class CalculatorParser extends Parser {
 		}
 		public TerminalNode NEQ() { return getToken(CalculatorParser.NEQ, 0); }
 		public NeqBoolTagContext(BoolExprContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).enterNeqBoolTag(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).exitNeqBoolTag(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CalculatorVisitor ) return ((CalculatorVisitor<? extends T>)visitor).visitNeqBoolTag(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 	public static class GteBoolTagContext extends BoolExprContext {
 		public Token op;
@@ -1609,19 +1326,6 @@ public class CalculatorParser extends Parser {
 		}
 		public TerminalNode GREQ() { return getToken(CalculatorParser.GREQ, 0); }
 		public GteBoolTagContext(BoolExprContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).enterGteBoolTag(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).exitGteBoolTag(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CalculatorVisitor ) return ((CalculatorVisitor<? extends T>)visitor).visitGteBoolTag(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 	public static class LtBoolTagContext extends BoolExprContext {
 		public Token op;
@@ -1633,19 +1337,6 @@ public class CalculatorParser extends Parser {
 		}
 		public TerminalNode LT() { return getToken(CalculatorParser.LT, 0); }
 		public LtBoolTagContext(BoolExprContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).enterLtBoolTag(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).exitLtBoolTag(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CalculatorVisitor ) return ((CalculatorVisitor<? extends T>)visitor).visitLtBoolTag(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 	public static class GtBoolTagContext extends BoolExprContext {
 		public Token op;
@@ -1657,19 +1348,6 @@ public class CalculatorParser extends Parser {
 		}
 		public TerminalNode GRE() { return getToken(CalculatorParser.GRE, 0); }
 		public GtBoolTagContext(BoolExprContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).enterGtBoolTag(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).exitGtBoolTag(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CalculatorVisitor ) return ((CalculatorVisitor<? extends T>)visitor).visitGtBoolTag(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 	public static class OrBoolTagContext extends BoolExprContext {
 		public Token op;
@@ -1681,38 +1359,12 @@ public class CalculatorParser extends Parser {
 		}
 		public TerminalNode OR() { return getToken(CalculatorParser.OR, 0); }
 		public OrBoolTagContext(BoolExprContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).enterOrBoolTag(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).exitOrBoolTag(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CalculatorVisitor ) return ((CalculatorVisitor<? extends T>)visitor).visitOrBoolTag(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 	public static class ExprBoolTagContext extends BoolExprContext {
 		public ExprContext expr() {
 			return getRuleContext(ExprContext.class,0);
 		}
 		public ExprBoolTagContext(BoolExprContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).enterExprBoolTag(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).exitExprBoolTag(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CalculatorVisitor ) return ((CalculatorVisitor<? extends T>)visitor).visitExprBoolTag(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 	public static class NotBoolTagContext extends BoolExprContext {
 		public Token op;
@@ -1721,19 +1373,6 @@ public class CalculatorParser extends Parser {
 		}
 		public TerminalNode NOT() { return getToken(CalculatorParser.NOT, 0); }
 		public NotBoolTagContext(BoolExprContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).enterNotBoolTag(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).exitNotBoolTag(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CalculatorVisitor ) return ((CalculatorVisitor<? extends T>)visitor).visitNotBoolTag(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 	public static class LteBoolTagContext extends BoolExprContext {
 		public Token op;
@@ -1745,19 +1384,6 @@ public class CalculatorParser extends Parser {
 		}
 		public TerminalNode LTEQ() { return getToken(CalculatorParser.LTEQ, 0); }
 		public LteBoolTagContext(BoolExprContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).enterLteBoolTag(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).exitLteBoolTag(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CalculatorVisitor ) return ((CalculatorVisitor<? extends T>)visitor).visitLteBoolTag(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 	public static class EqBoolTagContext extends BoolExprContext {
 		public Token op;
@@ -1769,19 +1395,6 @@ public class CalculatorParser extends Parser {
 		}
 		public TerminalNode EQ() { return getToken(CalculatorParser.EQ, 0); }
 		public EqBoolTagContext(BoolExprContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).enterEqBoolTag(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).exitEqBoolTag(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CalculatorVisitor ) return ((CalculatorVisitor<? extends T>)visitor).visitEqBoolTag(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 	public static class AndBoolTagContext extends BoolExprContext {
 		public Token op;
@@ -1793,19 +1406,6 @@ public class CalculatorParser extends Parser {
 		}
 		public TerminalNode AND() { return getToken(CalculatorParser.AND, 0); }
 		public AndBoolTagContext(BoolExprContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).enterAndBoolTag(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).exitAndBoolTag(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CalculatorVisitor ) return ((CalculatorVisitor<? extends T>)visitor).visitAndBoolTag(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final BoolExprContext boolExpr() throws RecognitionException {
@@ -1958,19 +1558,6 @@ public class CalculatorParser extends Parser {
 		public TerminalNode OPAR() { return getToken(CalculatorParser.OPAR, 0); }
 		public TerminalNode CPAR() { return getToken(CalculatorParser.CPAR, 0); }
 		public ReadExprTagContext(SpecialExprContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).enterReadExprTag(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).exitReadExprTag(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CalculatorVisitor ) return ((CalculatorVisitor<? extends T>)visitor).visitReadExprTag(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 	public static class SqrtExprTagContext extends SpecialExprContext {
 		public ExprContext value;
@@ -1981,19 +1568,6 @@ public class CalculatorParser extends Parser {
 			return getRuleContext(ExprContext.class,0);
 		}
 		public SqrtExprTagContext(SpecialExprContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).enterSqrtExprTag(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).exitSqrtExprTag(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CalculatorVisitor ) return ((CalculatorVisitor<? extends T>)visitor).visitSqrtExprTag(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final SpecialExprContext specialExpr() throws RecognitionException {
@@ -2064,19 +1638,6 @@ public class CalculatorParser extends Parser {
 			return getRuleContext(ExprContext.class,0);
 		}
 		public ExpFuncTagContext(LibraryFuncContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).enterExpFuncTag(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).exitExpFuncTag(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CalculatorVisitor ) return ((CalculatorVisitor<? extends T>)visitor).visitExpFuncTag(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 	public static class SinFuncTagContext extends LibraryFuncContext {
 		public ExprContext var;
@@ -2087,19 +1648,6 @@ public class CalculatorParser extends Parser {
 			return getRuleContext(ExprContext.class,0);
 		}
 		public SinFuncTagContext(LibraryFuncContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).enterSinFuncTag(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).exitSinFuncTag(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CalculatorVisitor ) return ((CalculatorVisitor<? extends T>)visitor).visitSinFuncTag(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 	public static class LogFuncTagContext extends LibraryFuncContext {
 		public ExprContext var;
@@ -2110,19 +1658,6 @@ public class CalculatorParser extends Parser {
 			return getRuleContext(ExprContext.class,0);
 		}
 		public LogFuncTagContext(LibraryFuncContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).enterLogFuncTag(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).exitLogFuncTag(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CalculatorVisitor ) return ((CalculatorVisitor<? extends T>)visitor).visitLogFuncTag(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 	public static class CosFuncTagContext extends LibraryFuncContext {
 		public ExprContext var;
@@ -2133,19 +1668,6 @@ public class CalculatorParser extends Parser {
 			return getRuleContext(ExprContext.class,0);
 		}
 		public CosFuncTagContext(LibraryFuncContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).enterCosFuncTag(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).exitCosFuncTag(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CalculatorVisitor ) return ((CalculatorVisitor<? extends T>)visitor).visitCosFuncTag(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final LibraryFuncContext libraryFunc() throws RecognitionException {
@@ -2244,19 +1766,6 @@ public class CalculatorParser extends Parser {
 		}
 		public TerminalNode CPAR() { return getToken(CalculatorParser.CPAR, 0); }
 		public ParenExprTagContext(ExprContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).enterParenExprTag(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).exitParenExprTag(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CalculatorVisitor ) return ((CalculatorVisitor<? extends T>)visitor).visitParenExprTag(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 	public static class AddExprTagContext extends ExprContext {
 		public List<ExprContext> expr() {
@@ -2267,53 +1776,14 @@ public class CalculatorParser extends Parser {
 		}
 		public TerminalNode ADD() { return getToken(CalculatorParser.ADD, 0); }
 		public AddExprTagContext(ExprContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).enterAddExprTag(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).exitAddExprTag(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CalculatorVisitor ) return ((CalculatorVisitor<? extends T>)visitor).visitAddExprTag(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 	public static class NumExprTagContext extends ExprContext {
 		public TerminalNode NUM() { return getToken(CalculatorParser.NUM, 0); }
 		public NumExprTagContext(ExprContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).enterNumExprTag(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).exitNumExprTag(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CalculatorVisitor ) return ((CalculatorVisitor<? extends T>)visitor).visitNumExprTag(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 	public static class IdTagContext extends ExprContext {
 		public TerminalNode ID() { return getToken(CalculatorParser.ID, 0); }
 		public IdTagContext(ExprContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).enterIdTag(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).exitIdTag(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CalculatorVisitor ) return ((CalculatorVisitor<? extends T>)visitor).visitIdTag(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 	public static class DivExprTagContext extends ExprContext {
 		public List<ExprContext> expr() {
@@ -2324,19 +1794,6 @@ public class CalculatorParser extends Parser {
 		}
 		public TerminalNode DIV() { return getToken(CalculatorParser.DIV, 0); }
 		public DivExprTagContext(ExprContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).enterDivExprTag(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).exitDivExprTag(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CalculatorVisitor ) return ((CalculatorVisitor<? extends T>)visitor).visitDivExprTag(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 	public static class MulExprTagContext extends ExprContext {
 		public List<ExprContext> expr() {
@@ -2347,19 +1804,6 @@ public class CalculatorParser extends Parser {
 		}
 		public TerminalNode MUL() { return getToken(CalculatorParser.MUL, 0); }
 		public MulExprTagContext(ExprContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).enterMulExprTag(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).exitMulExprTag(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CalculatorVisitor ) return ((CalculatorVisitor<? extends T>)visitor).visitMulExprTag(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 	public static class SubExprTagContext extends ExprContext {
 		public List<ExprContext> expr() {
@@ -2370,19 +1814,6 @@ public class CalculatorParser extends Parser {
 		}
 		public TerminalNode SUB() { return getToken(CalculatorParser.SUB, 0); }
 		public SubExprTagContext(ExprContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).enterSubExprTag(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).exitSubExprTag(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CalculatorVisitor ) return ((CalculatorVisitor<? extends T>)visitor).visitSubExprTag(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final ExprContext expr() throws RecognitionException {

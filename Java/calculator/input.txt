@@ -1,10 +1,2 @@
-define add (x, y) {
-    auto a, b
-    print(a);
-    print(b);
-    return x+y;
-}
-
-dubs = add(2,3);
-
-print(dubs);
+n = read();
+print(n);

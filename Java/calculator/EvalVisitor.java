@@ -49,6 +49,24 @@ public class EvalVisitor extends CalculatorBaseVisitor<Double> {
         return null;
     }
 
+    @Override
+    public Double visitVarDefBoolExprTag(CalculatorParser.VarDefBoolExprTagContext ctx){
+        this.current_scope.getVariables().put(ctx.ID().getText(), visit(ctx.boolExpr()));
+        return null;
+    }
+
+    @Override
+    public Double visitVarDefSpecialExprTag(CalculatorParser.VarDefSpecialExprTagContext ctx){
+        this.current_scope.getVariables().put(ctx.ID().getText(), visit(ctx.specialExpr()));
+        return null;
+    }
+
+    @Override
+    public Double visitVarDefLibraryFuncTag(CalculatorParser.VarDefLibraryFuncTagContext ctx){
+        this.current_scope.getVariables().put(ctx.ID().getText(), visit(ctx.libraryFunc()));
+        return null;
+    }
+
     /* ====================== IF STATEMENTS ====================== */ 
     @Override
     public Double visitIfDefSingleTag(CalculatorParser.IfDefSingleTagContext ctx){

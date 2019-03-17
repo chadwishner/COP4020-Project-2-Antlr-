@@ -79,6 +79,9 @@ autoVars
 varDef
     : ID ASSIGN expr #varDefTag
     | ID ASSIGN funcCall #varDefFuncCallTag
+    | ID ASSIGN boolExpr #varDefBoolExprTag
+    | ID ASSIGN specialExpr #varDefSpecialExprTag
+    | ID ASSIGN libraryFunc #varDefLibraryFuncTag
     ;
 
 // Print function

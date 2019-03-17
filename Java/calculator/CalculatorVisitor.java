@@ -121,6 +121,27 @@ public interface CalculatorVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitVarDefFuncCallTag(CalculatorParser.VarDefFuncCallTagContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code varDefBoolExprTag}
+	 * labeled alternative in {@link CalculatorParser#varDef}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitVarDefBoolExprTag(CalculatorParser.VarDefBoolExprTagContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code varDefSpecialExprTag}
+	 * labeled alternative in {@link CalculatorParser#varDef}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitVarDefSpecialExprTag(CalculatorParser.VarDefSpecialExprTagContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code varDefLibraryFuncTag}
+	 * labeled alternative in {@link CalculatorParser#varDef}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitVarDefLibraryFuncTag(CalculatorParser.VarDefLibraryFuncTagContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code printFuncTag}
 	 * labeled alternative in {@link CalculatorParser#printFunc}.
 	 * @param ctx the parse tree
