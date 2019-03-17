@@ -100,7 +100,6 @@ public class EvalVisitor extends CalculatorBaseVisitor<Double> {
 
     @Override 
     public Double visitForDefMultipleTag(CalculatorParser.ForDefMultipleTagContext ctx) {
-        System.out.println("Visting FOR-def");
         visit(ctx.expr1);
         while(visit(ctx.cond) != 0.0){
             visit(ctx.exec);
@@ -132,8 +131,6 @@ public class EvalVisitor extends CalculatorBaseVisitor<Double> {
         // Add the function and its params, variables, and codeSegment to a series of global functions hashmaps.
         String func_name = ctx.funcName.getText();
 
-        System.out.println("We're making this function: " + func_name);
-
         this.functions_auto_vars.put(func_name, ctx.autoVars());
         this.functions_params.put(func_name, ctx.params());
         this.functions_exec.put(func_name, ctx.exec);
@@ -144,8 +141,6 @@ public class EvalVisitor extends CalculatorBaseVisitor<Double> {
     @Override
     public Double visitFuncCallTag(CalculatorParser.FuncCallTagContext ctx){
         String func_name = ctx.ID().getText();
-        
-        System.out.println("Sup' bitches: " + func_name);
 
         CalculatorParser.ParamValuesContext param_values = ctx.paramValues();
         CalculatorParser.ParamsContext param_names = this.functions_params.get(func_name);
