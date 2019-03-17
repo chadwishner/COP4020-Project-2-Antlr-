@@ -7,14 +7,13 @@ import java.util.List;
 import java.lang.Math;
 import java.util.Scanner;
 
-import calculator.CalculatorParser.TopExprContext;
-
 public class EvalVisitor extends CalculatorBaseVisitor<Double> {
 
     List<Double> prints = new ArrayList<Double>();
-    HashMap<String, CalculatorParser.ParamsContext> functions_params = new HashMap<String, >();
-    HashMap<String, CalculatorParser.AutoVarsContext> functions_auto_variables = new HashMap<String, >();
-    HashMap<String, List<CalculatorParser.TopExprContext>> functions_exec = new HashMap<String, >();
+    HashMap<String, CalculatorParser.ParamsContext> functions_params = new HashMap<String, CalculatorParser.ParamsContext>();
+    HashMap<String, CalculatorParser.AutoVarsContext> functions_auto_vars = new HashMap<String, CalculatorParser.AutoVarsContext>();
+    HashMap<String, CalculatorParser.CodeBlockContext> functions_exec = new HashMap<String, CalculatorParser.CodeBlockContext>();
+    HashMap<String, CalculatorParser.ExprContext> functions_return = new HashMap<String, CalculatorParser.ExprContext>();
     Scanner scan = new Scanner(System.in);
 
     // Create a new global scope, of which new sub-scopes will be created from.
@@ -132,25 +131,56 @@ public class EvalVisitor extends CalculatorBaseVisitor<Double> {
     public Double visitFuncDefTag(CalculatorParser.FuncDefTagContext ctx) { 
         // Add the function and its params, variables, and codeSegment to a series of global functions hashmaps.
         String func_name = ctx.funcName.getText();
-        this.functions_auto_variables.put(func_name, ctx.autoVars());
+
+        System.out.println("We're making this function: " + func_name);
+
+        this.functions_auto_vars.put(func_name, ctx.autoVars());
         this.functions_params.put(func_name, ctx.params());
         this.functions_exec.put(func_name, ctx.exec);
+        this.functions_return.put(func_name, ctx.returnExpr);
         return null;
     }
 
     @Override
     public Double visitFuncCallTag(CalculatorParser.FuncCallTagContext ctx){
         String func_name = ctx.ID().getText();
-        if(this.functions.containsKey(func_name)){
+        
+        System.out.println("Sup' bitches: " + func_name);
+
+        CalculatorParser.ParamValuesContext param_values = ctx.paramValues();
+        CalculatorParser.ParamsContext param_names = this.functions_params.get(func_name);
+        CalculatorParser.AutoVarsContext auto_vars = this.functions_auto_vars.get(func_name);
+        CalculatorParser.CodeBlockContext code_fragments = this.functions_exec.get(func_name);
+        CalculatorParser.ExprContext return_statement = this.functions_return.get(func_name);
+        
+        if(param_values.NUM().size() == param_names.ID().size()){
             // Create a new scope for the function
             Scope func_scope = new Scope(this.current_scope, false);
-            this.current_scope = func_scope;
-            CalculatorParser.ParamValuesContext param_values = ctx.paramValues();
-            
-            
+            this.current_scope = func_scope;            
+
+            // Init all the auto_vars to zero in the current scope.
+            if(auto_vars != null){
+                for(int i = 0; i < auto_vars.ID().size(); i++) {
+                    this.current_scope.variables.put(auto_vars.ID().get(i).getText(), 0.0);
+                }
+            }
+
+            // Assign values to params in current scope
+            if(param_values != null && param_names != null){
+                for(int i = 0; i < param_names.ID().size(); i++) {
+                    this.current_scope.variables.put(param_names.ID().get(i).getText(), Double.valueOf(param_values.NUM().get(i).getText()));
+                }
+            }
+
+            if(code_fragments != null)
+                visit(code_fragments);
+
+            Double return_val = visit(return_statement);
+
             // Remove the scope from the function
             this.current_scope = this.current_scope.getParentScope();
-            return null;
+
+            return return_val;
         }else{
             System.out.println("Invalid function call/That function does not exist.");
             return null;

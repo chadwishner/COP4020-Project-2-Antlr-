@@ -1,22 +1,10 @@
-print(10);
-2+3;
-s(200);
-if(0)
-5+2;
-else
-1+1;
-if(0){
-    print(1337);
-    print(1338);
-}else{
-    15+1;
-    16+1;
+define add (x, y) {
+    auto a, b
+    print(a);
+    print(b);
+    return x+y;
 }
-n = 5;
-while(n > 0){
-    print(100);
-    n = n - 1;
-}
-print(n);
-for(i = 0; i < 3; i = i + 1)
-    print(i);
+
+dubs = add(2,3);
+
+print(dubs);

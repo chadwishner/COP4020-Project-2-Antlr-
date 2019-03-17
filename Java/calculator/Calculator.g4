@@ -15,7 +15,7 @@ exprList
 
 // Code blocks for loops/functions
 codeBlock
-    : OBRC topExpr* CBRC #codeBlockTag
+    : topExpr* #codeBlockTag
     ;
 
 // Should cover all types of expressions
@@ -36,29 +36,29 @@ topExpr
 // If Definitions
 ifDef
     : IF OPAR cond=boolExpr CPAR expr1=topExpr ( ELSE expr2=topExpr )? #ifDefSingleTag
-    | IF OPAR cond=boolExpr CPAR exprList1=codeBlock (ELSE exprList2=codeBlock)? #ifDefMultipleTag
+    | IF OPAR cond=boolExpr CPAR OBRC exprList1=codeBlock CBRC (ELSE OBRC exprList2=codeBlock CBRC)? #ifDefMultipleTag
     ;
 
 // While Loops
 whileDef
     : WHILE OPAR cond=boolExpr CPAR exec=topExpr #whileDefSingleTag
-    | WHILE OPAR cond=boolExpr CPAR exec=codeBlock #whileDefMultipleTag
+    | WHILE OPAR cond=boolExpr CPAR OBRC exec=codeBlock CBRC #whileDefMultipleTag
     ;
 
 // For Loops
 forDef
     : FOR OPAR expr1=varDef SEMICOLON cond=boolExpr SEMICOLON expr2=varDef CPAR exec=topExpr #forDefSingleTag
-    | FOR OPAR expr1=varDef SEMICOLON cond=boolExpr SEMICOLON expr2=varDef CPAR exec=codeBlock #forDefMultipleTag
+    | FOR OPAR expr1=varDef SEMICOLON cond=boolExpr SEMICOLON expr2=varDef CPAR OBRC exec=codeBlock CBRC #forDefMultipleTag
     ;
 
 // Function Defintions
 funcDef
-    : DEFINE funcName=ID params OBRC autoVars exec=topExpr+ CBRC #funcDefTag
+    : DEFINE funcName=ID params? OBRC autoVars? exec=codeBlock? RETURN returnExpr=expr SEMICOLON ignored=codeBlock? CBRC #funcDefTag
     ;
 
 // Function Calls
 funcCall
-    : ID paramValues #funcCallTag
+    : ID paramValues? #funcCallTag
     ;
 
 // Params for the function Def
@@ -140,6 +140,7 @@ COMMA: ',';
 SEMICOLON: ';';
 DEFINE: 'define';
 AUTO: 'auto';
+RETURN: 'return';
 SQRT: 'sqrt';
 READ: 'read';
 PRINT:'print';
