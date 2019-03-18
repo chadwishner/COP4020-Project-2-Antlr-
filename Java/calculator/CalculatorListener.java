@@ -128,6 +128,16 @@ public interface CalculatorListener extends ParseTreeListener {
 	 */
 	void exitFuncDefTag(CalculatorParser.FuncDefTagContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link CalculatorParser#returnType}.
+	 * @param ctx the parse tree
+	 */
+	void enterReturnType(CalculatorParser.ReturnTypeContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CalculatorParser#returnType}.
+	 * @param ctx the parse tree
+	 */
+	void exitReturnType(CalculatorParser.ReturnTypeContext ctx);
+	/**
 	 * Enter a parse tree produced by the {@code funcCallTag}
 	 * labeled alternative in {@link CalculatorParser#funcCall}.
 	 * @param ctx the parse tree
