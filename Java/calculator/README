@@ -1,0 +1,42 @@
+README
+
+In order to test the bc calculator, the user must place their input into the Java/calculator/input.txt or provide a different text file to read from.
+
+Supplied with the submission are suite of test case files, these tests must be named instead of input.txt to run:
+	function_tests.txt
+	for_loop_tests.txt
+	while_loop_tests.txt
+	if_statement_tests.txt
+	library_func_tests.txt
+	special_exp_tests.txt
+	variable_tests.txt
+	arithmetic_tests.txt
+	boolean_tests.txt
+
+
+Commands to run in order to test program:
+	cd Java/calculator/
+	antlr4 Calculator.g4 -visitor
+	javac Calculator*.java Scope.java EvalVisitor.java Main.java
+	cd ..
+	java calculator.Main calculator/input.txt
+
+
+Features implemented:
+	Comments: /* ... */
+	Basic expressions with variables
+	Boolean Expressions
+	Precedence
+	Special Expression: read and sqrt
+	Expressions
+	Math library functions: s, c, l, e
+	if-then-else statements
+	while statements
+	for loops
+	user-defined functions
+
+
+Key Notes:
+	Any input that is not an if/else, while, for, or function definition requires a semi-colon ;
+	All functions must have a return statement
+	Recursive functions are kind of supported, they are not useful though, because we don't support conditional return statements. So they just recursively run forever.

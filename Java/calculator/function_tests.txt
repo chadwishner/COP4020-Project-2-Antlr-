@@ -1,0 +1,35 @@
+/*function tests
+	Results: 4.0\n6.0\n20.0\n0.0\n6.0\n0.0\n0.0\n1.0\n2.0\n3.0\n12.0
+*/
+define double(n){
+	return n*2;
+}
+
+define dubz(n){
+	return (n*2);
+}
+
+define mult(n,m){
+	return n*m;
+}
+
+define add(n){
+	auto m, o, p;
+	print(m);
+	print(n);
+	print(o);
+	print(p);
+	m = 1;
+	o = 2;
+	p = 3;
+	print(m);
+	print(o);
+	print(p);
+
+	return m + n + o + p;
+}
+
+double(2);
+dubz(3);
+mult(4,5);
+add(6);

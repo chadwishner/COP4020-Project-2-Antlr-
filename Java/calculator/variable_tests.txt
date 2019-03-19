@@ -1,0 +1,20 @@
+/* Variable Unit Tests 
+	Results: 0.0\n1.0\n5.0\n-0.9589242746631385\n2.0
+*/
+
+/* Define and print variable 'i' */
+i = 0;
+i;
+
+/* Add to variable */
+i+1;
+
+/* Redefine variable */
+i = 5;
+
+/* Different way to print variable */
+print(i);
+
+/* Use variable within expressions */
+s(i);
+sqrt(i - 1);
